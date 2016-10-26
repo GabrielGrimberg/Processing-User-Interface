@@ -9,6 +9,9 @@
 *                                        *
 ******************************************/
 
+/* Global Variables */
+int projectState = 0;
+
 void setup()
 {
   fullScreen();
@@ -18,7 +21,20 @@ void setup()
 
 void draw()
 {
+  if(keyPressed && key == ' ')
+  {
+    projectState = 1;
+  }
   
+  switch(projectState)
+  {
+    case 0:
+      BackgroundStart();
+      break;
+    case 1: 
+      TelosCharacter();
+      break;
+  }
 }
 
 void BackgroundStart()
@@ -32,4 +48,16 @@ void BackgroundStart()
   image(telosBackgroundImage, 0, 0); //Image Position
   
   text("Press Space to Continue", textPosX, textPosY); //Display text.
+}
+
+void TelosCharacter()
+{
+  int telosXPos = 320;
+  int telosYPos = 700;
+  PImage telosImage; //Image Variable
+  
+  telosImage = loadImage("Telos.png"); //Loading the image
+  telosImage.resize(telosXPos, telosYPos); //Image Size
+  image(telosImage, 460, 20); //Image Position
+
 }
