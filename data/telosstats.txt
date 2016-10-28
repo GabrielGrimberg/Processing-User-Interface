@@ -1,11 +1,10 @@
 Enrange	Minimum Hit	Maximum Hit	Loot Table
-0		100			6000		Bronze
-25		300			6200		Bronze
-50		400			6600		Silver
-75 		550			7000		Silver
-100		700			7500		Gold
-125		800			7900		Gold
-150		880			8100		Gold
-175		900			8300		Gold
-200		990			8800		Gold
-
+0	100	6000	Bronze
+25	300	6200	Bronze
+50	400	6600	Silver
+75	550	7000	Silver
+100	700	7500	Gold
+125	800	7900	Gold
+150	880	8100	Gold
+175	900	8300	Gold
+200	990	8800	Gold
