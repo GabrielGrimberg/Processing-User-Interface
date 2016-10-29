@@ -45,7 +45,7 @@ void draw()
   
   if(keyPressed && key == 'Y' || key == 'y')
   {
-    timeMove = 0;
+    timeMove = 0; //Setting it back to 0 seconds.
     
     if(timeMove > 6) //6 seconds
     {
@@ -66,30 +66,10 @@ void draw()
       //Choose character
     }
   }
-  
-  /*
-  if(keyPressed && key == 'Y' || key == 'y')
+  if(keyPressed && key == 'E' || key == 'e')
   {
-    clear();
-    projectState = 1;
+    exit(); //Ending the programing.
   }
-  if(keyPressed && key == ' ')
-  {
-    clear();
-    projectState = 2;
-  }
-  
-  
-  switch(projectState)
-  {
-    case 1:
-      BackgroundStart();
-      break;
-    case 2: 
-      TelosCharacter();
-      break;
-  }
-  */
   
 }
 
