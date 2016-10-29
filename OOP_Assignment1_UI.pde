@@ -8,6 +8,10 @@
 *  Due Date: 29th of November 2016.      *
 *                                        *
 ******************************************/
+  
+import processing.sound.*;
+SoundFile clickSound;
+SoundFile mouseHover;
 
 /* Global Variables */
 /* Variables for reading for stats */
@@ -15,53 +19,61 @@ ArrayList<Telos> telosArray = new ArrayList<Telos>(); //Expense Class
 
 /* Variables for Game State */
 int projectState = 0;
+int menuAdvance = 0;
 
 /*Variables for Loading Screen */
 int movingSpeed = 0;
-int timeMove = second();
+//int timeMove = millis(); Problem
 
-/* Variables for Start Menu */
-float boxXPoint; //Variable for the X Position.
-float boxYPoint; //Variable for the Y Position.
-int sizeOfbox = 100; //Variable for the size of the box
-int boxCurve = 50; //Variable for the curve of the box.
-boolean mouseOnbox = false; //Variable to check if the mouse is on the box.
-boolean mousePressedOnbox = false; //Variable to highlight if box is pressed.
+/* Variables for Start Menu (Box 1) */
+float box1XPoint; //Variable for the X Position.
+float box1YPoint; //Variable for the Y Position.
+int sizeOfbox1 = 100; //Variable for the size of the box
+int box1Curve = 50; //Variable for the curve of the box.
+boolean mouseOnbox1 = false; //Variable to check if the mouse is on the box.
+boolean mousePressedOnbox1 = false; //Variable to highlight if box is pressed.
+
+/* Variables for Start Menu (Box 1) */
+float box2XPoint; //Variable for the X Position.
+float box2YPoint; //Variable for the Y Position.
+int sizeOfbox2 = 100; //Variable for the size of the box
+int box2Curve = 50; //Variable for the curve of the box.
+boolean mouseOnbox2 = false; //Variable to check if the mouse is on the box.
+boolean mousePressedOnbox2 = false; //Variable to highlight if box is pressed.
 
 void setup()
 {
   size(displayWidth, displayHeight);
-  
-  //BackgroundStart(); //Background
-  
-  //telosDataLoader();
-  //telosDataPrint();
-  
+ 
 }
 
 void draw()
 {
-  startMenu();
-  
-  if(keyPressed && key == 'Y' || key == 'y')
+  if(menuAdvance == 0)
   {
-    timeMove = 0; //Setting it back to 0 seconds.
+    startMenu();
+  }
+  
+  if(menuAdvance == 1)
+  {
+    //timeMove = 0; //Setting it back to 0 seconds. Problem
     
-    if(timeMove > 6) //6 seconds
+    if(millis() > 10000) //10 seconds
     {
       BackgroundStart();
-    }   
+    } 
     else
     {
       loadingScreen();
     }
     
-    if(timeMove > 10) //10 seconds
+    
+    if(millis() > 15000) //10 seconds
     {
       BAraxxorStart();
     }
     
-    if(timeMove > 20) //20 seconds
+    if(millis() > 20000) //20 seconds
     {
       //Choose character
     }
@@ -160,10 +172,10 @@ void loadingScreen()
          
     fill(0);
     
-    quad(displayWidth / 1.2,displayHeight / 1.6,
-         displayWidth / 1.1,displayHeight / 1.6,
-         displayWidth / 1.1,displayHeight / 1.456,
-         displayWidth / 1.2,displayHeight / 1.456); //Back to start
+    quad(1500,displayHeight / 1.6,
+         985,displayHeight / 1.6,
+         985,displayHeight / 1.456,
+         1500,displayHeight / 1.456); //Back to start
          
     quad(0, displayHeight / 1.6,
          displayWidth / 4.25,displayHeight / 1.6,
@@ -187,22 +199,22 @@ void startMenu()
   background(0,0,0,255); //Background colour.
   fill(255);
   textSize(50); //Text size for my name.
-  text("Gabriel Grimberg ", 
-        displayWidth / 2.9, displayHeight / 3.5); //My name message.
-        
-  boxXPoint = width/3.0; //X Position of box.
-  boxYPoint = height/2.0; //Y Position of box.
+  text("Gabriel Grimberg", 
+        displayWidth / 2.9,
+        displayHeight / 3.5); //My name message.       
+  box1XPoint = width/3.0; //X Position of box.
+  box1YPoint = height/2.0; //Y Position of box.
   
   rectMode(RADIUS);
   
-  if(mouseX > boxXPoint - sizeOfbox &&  //If statement to check
-     mouseX < boxXPoint + sizeOfbox &&  //If the mouse is anywhere
-     mouseY > boxYPoint - sizeOfbox &&  //near the box.
-     mouseY < boxYPoint + sizeOfbox)    
+  if(mouseX > box1XPoint - sizeOfbox1 &&  //If statement to check
+     mouseX < box1XPoint + sizeOfbox1 &&  //If the mouse is anywhere
+     mouseY > box1YPoint - sizeOfbox1 &&  //near the box.
+     mouseY < box1YPoint + sizeOfbox1)    
   {
-    mouseOnbox = true; //Set true, continue to mousePressed()
+    mouseOnbox1 = true; //Set true, continue to mousePressed()
     
-    if(!mousePressedOnbox) 
+    if(!mousePressedOnbox1) 
     { 
       stroke(255);
       fill(153); 
@@ -213,27 +225,34 @@ void startMenu()
     stroke(153);
     fill(153);
     
-    mouseOnbox = false;
+    mouseOnbox1 = false;
   }
   
   //Drawing the box.
-  rect(boxXPoint, boxYPoint, sizeOfbox, sizeOfbox, boxCurve);
+  rect(box1XPoint, box1YPoint, sizeOfbox1, sizeOfbox1, box1Curve);
+  fill(0);
+  text("Start", 
+        displayWidth / 3.5,
+        displayHeight / 1.91); //My name message.
 }
 void mousePressed() 
 {
-  if(mouseOnbox) //If true
-  { 
-    mousePressedOnbox = true; //Set variable to true
+  if(mouseOnbox1) //If true
+  {     
+    mousePressedOnbox1 = true; //Set variable to true
     fill(255, 255, 255); //To highlight the box.
+    clickSound = new SoundFile(this, "Click.mp3");
+    clickSound.play();
+    menuAdvance = 1; //Setting to 1 so it doesn't overlap.
   } 
   else 
   {
-    mousePressedOnbox = false; //If not, set to false.
+    mousePressedOnbox1 = false; //If not, set to false.
   }
   
 }
 
 void mouseReleased() 
 {
-  mousePressedOnbox = false; //If mouse released set it back to false.
+  mousePressedOnbox1 = false; //If mouse released set it back to false.
 }
