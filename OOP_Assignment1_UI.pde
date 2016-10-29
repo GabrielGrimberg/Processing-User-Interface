@@ -10,9 +10,23 @@
 ******************************************/
 
 /* Global Variables */
+/* Variables for reading for stats */
 ArrayList<Telos> telosArray = new ArrayList<Telos>(); //Expense Class
-//int projectState = 0;
+
+/* Variables for Game State */
+int projectState = 0;
+
+/*Variables for Loading Screen */
 int movingSpeed = 0;
+int timeMove = second();
+
+/* Variables for Start Menu */
+float boxXPoint; //Variable for the X Position.
+float boxYPoint; //Variable for the Y Position.
+int sizeOfbox = 100; //Variable for the size of the box
+int boxCurve = 50; //Variable for the curve of the box.
+boolean mouseOnbox = false; //Variable to check if the mouse is on the box.
+boolean mousePressedOnbox = false; //Variable to highlight if box is pressed.
 
 void setup()
 {
@@ -26,28 +40,35 @@ void setup()
 }
 
 void draw()
-{ 
-  if(millis() > 6000) //6 seconds
-  {
-    BackgroundStart();
-  }   
-  else
-  {
-    loadingScreen();
-  }
+{
+  startMenu();
   
-  if(millis() > 10000) //10 seconds
+  if(keyPressed && key == 'Y' || key == 'y')
   {
-    BAraxxorStart();
-  }
-  
-  if(millis() > 20000) //20 seconds
-  {
-    //Choose character
+    timeMove = 0;
+    
+    if(timeMove > 6) //6 seconds
+    {
+      BackgroundStart();
+    }   
+    else
+    {
+      loadingScreen();
+    }
+    
+    if(timeMove > 10) //10 seconds
+    {
+      BAraxxorStart();
+    }
+    
+    if(timeMove > 20) //20 seconds
+    {
+      //Choose character
+    }
   }
   
   /*
-  if(keyPressed && key == 'R' || key == 'r')
+  if(keyPressed && key == 'Y' || key == 'y')
   {
     clear();
     projectState = 1;
@@ -57,6 +78,7 @@ void draw()
     clear();
     projectState = 2;
   }
+  
   
   switch(projectState)
   {
@@ -68,6 +90,7 @@ void draw()
       break;
   }
   */
+  
 }
 
 void BackgroundStart()
@@ -178,3 +201,59 @@ void loadingScreen()
   }
 
 }//End loadingScreen()
+
+void startMenu()
+{
+  background(0,0,0,255); //Background colour.
+  fill(255);
+  textSize(50); //Text size for my name.
+  text("Gabriel Grimberg ", 
+        displayWidth / 2.9, displayHeight / 3.5); //My name message.
+        
+  boxXPoint = width/3.0; //X Position of box.
+  boxYPoint = height/2.0; //Y Position of box.
+  
+  rectMode(RADIUS);
+  
+  if(mouseX > boxXPoint - sizeOfbox &&  //If statement to check
+     mouseX < boxXPoint + sizeOfbox &&  //If the mouse is anywhere
+     mouseY > boxYPoint - sizeOfbox &&  //near the box.
+     mouseY < boxYPoint + sizeOfbox)    
+  {
+    mouseOnbox = true; //Set true, continue to mousePressed()
+    
+    if(!mousePressedOnbox) 
+    { 
+      stroke(255);
+      fill(153); 
+    } 
+  } 
+  else 
+  {
+    stroke(153);
+    fill(153);
+    
+    mouseOnbox = false;
+  }
+  
+  //Drawing the box.
+  rect(boxXPoint, boxYPoint, sizeOfbox, sizeOfbox, boxCurve);
+}
+void mousePressed() 
+{
+  if(mouseOnbox) //If true
+  { 
+    mousePressedOnbox = true; //Set variable to true
+    fill(255, 255, 255); //To highlight the box.
+  } 
+  else 
+  {
+    mousePressedOnbox = false; //If not, set to false.
+  }
+  
+}
+
+void mouseReleased() 
+{
+  mousePressedOnbox = false; //If mouse released set it back to false.
+}
