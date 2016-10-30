@@ -78,10 +78,6 @@ void draw()
       //Choose character
     }
   }
-  if(keyPressed && key == 'E' || key == 'e')
-  {
-    exit(); //Ending the programing.
-  }
   
 }
 
@@ -198,6 +194,8 @@ void startMenu()
 {
   background(0,0,0,255); //Background colour.
   fill(255);
+  
+  /* For Option 1 */
   textSize(50); //Text size for my name.
   text("Gabriel Grimberg", 
         displayWidth / 2.9,
@@ -234,7 +232,43 @@ void startMenu()
   text("Start", 
         displayWidth / 3.5,
         displayHeight / 1.91); //My name message.
-}
+  
+  /* For Option 2 */      
+  box2XPoint = width/1.5; //X Position of box.
+  box2YPoint = height/2.0; //Y Position of box.
+  
+  rectMode(RADIUS);
+  
+  if(mouseX > box2XPoint - sizeOfbox2 &&  //If statement to check
+     mouseX < box2XPoint + sizeOfbox2 &&  //If the mouse is anywhere
+     mouseY > box2YPoint - sizeOfbox2 &&  //near the box.
+     mouseY < box2YPoint + sizeOfbox2)    
+  {
+    mouseOnbox2 = true; //Set true, continue to mousePressed()
+    
+    if(!mousePressedOnbox2) 
+    { 
+      stroke(255);
+      fill(153); 
+    } 
+  } 
+  else 
+  {
+    stroke(153);
+    fill(153);
+    
+    mouseOnbox2 = false;
+  }
+  
+  //Drawing the box.
+  rect(box2XPoint, box2YPoint, sizeOfbox2, sizeOfbox2, box2Curve);
+  fill(0);
+  text("End", 
+        displayWidth / 1.59,
+        displayHeight / 1.91); //My name message.
+        
+}//startMenu()
+
 void mousePressed() 
 {
   if(mouseOnbox1) //If true
@@ -250,9 +284,23 @@ void mousePressed()
     mousePressedOnbox1 = false; //If not, set to false.
   }
   
+  if(mouseOnbox2) //If true
+  {     
+    mousePressedOnbox2 = true; //Set variable to true
+    fill(255, 255, 255); //To highlight the box.
+    clickSound = new SoundFile(this, "Click.mp3");
+    clickSound.play();
+    exit(); //Terminating the program
+  } 
+  else 
+  {
+    mousePressedOnbox1 = false; //If not, set to false.
+  }
+  
 }
 
 void mouseReleased() 
 {
   mousePressedOnbox1 = false; //If mouse released set it back to false.
+  mousePressedOnbox2 = false; //If mouse released set it back to false.
 }
