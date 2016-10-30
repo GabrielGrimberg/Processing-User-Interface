@@ -21,6 +21,7 @@ ArrayList<Telos> telosArray = new ArrayList<Telos>(); //Expense Class
 /* Variables for Game State */
 int projectState = 0;
 int menuAdvance = 0;
+int noMusicLoop = 0; //Making sure the music doesn't loop.
 
 /*Variables for Loading Screen */
 int movingSpeed = 0;
@@ -273,15 +274,19 @@ void startMenu()
 void mousePressed() 
 {
   if(mouseOnbox1) //If true
-  {     
-    mousePressedOnbox1 = true; //Set variable to true
-    fill(255, 255, 255); //To highlight the box.
-    clickSound = new SoundFile(this, "Click.mp3");
-    clickSound.play();
+  {
+    if(noMusicLoop == 0)
+    {
+      mousePressedOnbox1 = true; //Set variable to true
+      fill(255, 255, 255); //To highlight the box.
+      clickSound = new SoundFile(this, "Click.mp3");
+      clickSound.play();
     
-    backgroundMusic = new  SoundFile(this, "BMusic.mp3");
-    backgroundMusic.play();
-    menuAdvance = 1; //Setting to 1 so it doesn't overlap.
+      backgroundMusic = new  SoundFile(this, "BMusic.mp3");
+      backgroundMusic.play();
+      menuAdvance = 1; //Setting to 1 so it doesn't overlap.
+      noMusicLoop = 1; //Making sure the music doesn't break.
+    }
   } 
   else 
   {
