@@ -59,7 +59,7 @@ void draw()
   {
     //timeMove = 0; //Setting it back to 0 seconds. Problem
     
-    if(millis() > 5000) //10 seconds
+    if(millis() > 5000) //5 seconds
     {
       BackgroundStart();
     } 
@@ -69,22 +69,22 @@ void draw()
     }
     
     
-    if(millis() > 7000) //10 seconds
+    if(millis() > 7000) //7 seconds
     {
       BAraxxorStart();
     }
     
-    if(millis() > 9000) //20 seconds
+    if(millis() > 9000) //9 seconds
     {
       BMBackground();
     }
     
-    if(millis() > 11000) //25 seconds
+    if(millis() > 11000) //11 seconds
     {
       YakamaruB();
     }
     
-    if(millis() > 15000) //30 seconds
+    if(millis() > 15000) //15 seconds
     {
       clear(); //Clears the introduction images.
       backgroundMusic.stop(); //Stops the background music.
@@ -157,7 +157,8 @@ void TelosCharacter()
   
   telosImage = loadImage("Telos.png"); //Loading the image
   telosImage.resize(telosXPos, telosYPos); //Image Size
-  image(telosImage, 460, 20); //Image Position
+  imageMode(CENTER);
+  image(telosImage, displayWidth / 2, displayHeight / 2, 320, 700);
 }
 
 void AraxxorCharacter()
@@ -170,7 +171,7 @@ void AraxxorCharacter()
   araxxorImage.resize(araxxorXPos, araxxorYPos); //Image Size
   imageMode(CENTER);
   image(araxxorImage, displayWidth / 2, displayHeight / 2,
-                      displayWidth / 2, displayHeight /2);
+                      displayWidth / 2, displayHeight / 2);
 
 }
 
