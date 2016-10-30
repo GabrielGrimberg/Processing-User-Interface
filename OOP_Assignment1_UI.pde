@@ -21,7 +21,7 @@ ArrayList<Telos> telosArray = new ArrayList<Telos>(); //Expense Class
 int projectState = 0;
 int menuAdvance = 0;
 int noMusicLoop = 0; //Making sure the music doesn't loop.
-//int charNoMusic = 0; //Needs work.
+int charNoMusic = 0; //Making sure you can't hear the click again.
 int telosAdv = 0;
 
 /*Variables for Loading Screen */
@@ -92,6 +92,7 @@ void draw()
     
     if(telosAdv == 1)
     {
+      clear();
       TelosCharacter();
     }
     
@@ -358,11 +359,15 @@ void mousePressed()
   //Character Menu Part (Telos)
   if(telosBox) //If true
   {
-    telosBoxPressed = true; //Set variable to true
-    fill(255, 255, 255); //To highlight the box.
-    clickSound = new SoundFile(this, "Click.mp3");
-    clickSound.play();
-    telosAdv = 1;
+    if(charNoMusic == 0)
+    {
+      telosBoxPressed = true; //Set variable to true
+      fill(255, 255, 255); //To highlight the box.
+      clickSound = new SoundFile(this, "Click.mp3");
+      clickSound.play();
+      charNoMusic = 1;
+      telosAdv = 1;
+    }
   } 
   else 
   {
@@ -372,10 +377,14 @@ void mousePressed()
   //Character Menu Part (Araxxor)
   if(araxxorBox) //If true
   {
-    araxxorBoxPressed = true; //Set variable to true
-    fill(255, 255, 255); //To highlight the box.
-    clickSound = new SoundFile(this, "Click.mp3");
-    clickSound.play();
+    if(charNoMusic == 0)
+    {
+      araxxorBoxPressed = true; //Set variable to true
+      fill(255, 255, 255); //To highlight the box.
+      clickSound = new SoundFile(this, "Click.mp3");
+      clickSound.play();
+      charNoMusic = 1;
+    }
   } 
   else 
   {
