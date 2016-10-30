@@ -12,6 +12,7 @@
 import processing.sound.*;
 SoundFile clickSound;
 SoundFile mouseHover;
+SoundFile backgroundMusic;
 
 /* Global Variables */
 /* Variables for reading for stats */
@@ -277,6 +278,9 @@ void mousePressed()
     fill(255, 255, 255); //To highlight the box.
     clickSound = new SoundFile(this, "Click.mp3");
     clickSound.play();
+    
+    backgroundMusic = new  SoundFile(this, "BMusic.mp3");
+    backgroundMusic.play();
     menuAdvance = 1; //Setting to 1 so it doesn't overlap.
   } 
   else 
