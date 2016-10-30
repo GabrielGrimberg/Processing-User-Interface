@@ -23,9 +23,10 @@ int menuAdvance = 0;
 int noMusicLoop = 0; //Making sure the music doesn't loop.
 int charNoMusic = 0; //Making sure you can't hear the click again.
 int telosAdv = 0;
+int raxAdv = 0;
 
 /*Variables for Loading Screen */
-int movingSpeed = 0;
+int movingSpeed = 0; //Speed the loading bar moves.
 //int timeMove = millis(); Problem
 
 /* Boolean Variables for the Introduction Menu */
@@ -58,7 +59,7 @@ void draw()
   {
     //timeMove = 0; //Setting it back to 0 seconds. Problem
     
-    if(millis() > 10000) //10 seconds
+    if(millis() > 5000) //10 seconds
     {
       BackgroundStart();
     } 
@@ -68,22 +69,22 @@ void draw()
     }
     
     
-    if(millis() > 15000) //10 seconds
+    if(millis() > 7000) //10 seconds
     {
       BAraxxorStart();
     }
     
-    if(millis() > 20000) //20 seconds
+    if(millis() > 9000) //20 seconds
     {
       BMBackground();
     }
     
-    if(millis() > 25000) //25 seconds
+    if(millis() > 11000) //25 seconds
     {
       YakamaruB();
     }
     
-    if(millis() > 30000) //30 seconds
+    if(millis() > 15000) //30 seconds
     {
       clear(); //Clears the introduction images.
       backgroundMusic.stop(); //Stops the background music.
@@ -94,6 +95,12 @@ void draw()
     {
       clear();
       TelosCharacter();
+    }
+    
+    if(raxAdv == 1)
+    {
+      clear();
+      AraxxorCharacter();
     }
     
   }
@@ -151,6 +158,19 @@ void TelosCharacter()
   telosImage = loadImage("Telos.png"); //Loading the image
   telosImage.resize(telosXPos, telosYPos); //Image Size
   image(telosImage, 460, 20); //Image Position
+}
+
+void AraxxorCharacter()
+{
+  int araxxorXPos = 977;
+  int araxxorYPos = 609;
+  PImage araxxorImage; //Image Variable
+  
+  araxxorImage = loadImage("Araxxor.png"); //Loading the image
+  araxxorImage.resize(araxxorXPos, araxxorYPos); //Image Size
+  imageMode(CENTER);
+  image(araxxorImage, displayWidth / 2, displayHeight / 2,
+                      displayWidth / 2, displayHeight /2);
 
 }
 
@@ -384,6 +404,7 @@ void mousePressed()
       clickSound = new SoundFile(this, "Click.mp3");
       clickSound.play();
       charNoMusic = 1;
+      raxAdv = 1;
     }
   } 
   else 
