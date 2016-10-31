@@ -51,16 +51,15 @@ void setup()
 }
 
 void draw()
-{ 
+{
   int timeMove = millis(); //Problem
   
-  if(menuAdvance == 0)
+  switch(menuAdvance)
   {
-    startMenu();
-  }
-  
-  if(menuAdvance == 1)
-  {
+    case 0:
+      startMenu();;
+      break;
+    case 1:
     //timeMove = 0; //Setting it back to 0 seconds. Problem
     if(timeMove > 5000) //5 seconds
     {
@@ -70,7 +69,6 @@ void draw()
     {
       loadingScreen();
     }
-    
     
     if(timeMove > 7000) //7 seconds
     {
@@ -105,7 +103,9 @@ void draw()
       clear();
       AraxxorCharacter();
     }
-  } 
+    break;
+  }
+  
 }
 
 void BackgroundStart()
