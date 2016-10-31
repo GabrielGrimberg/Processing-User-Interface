@@ -105,9 +105,7 @@ void draw()
       clear();
       AraxxorCharacter();
     }
-    
-  }
-  
+  } 
 }
 
 void BackgroundStart()
@@ -116,9 +114,7 @@ void BackgroundStart()
   
   telosBackgroundImage = loadImage("TelosBackground.jpg"); //Loading the image
   telosBackgroundImage.resize(displayWidth, displayHeight); //Image Size
-  image(telosBackgroundImage, 0, 0); //Image Position
-  
-  
+  image(telosBackgroundImage, 0, 0); //Image Position 
 }
 
 void BAraxxorStart()
@@ -128,7 +124,6 @@ void BAraxxorStart()
   araxxorBackgroundImage = loadImage("AraxxorBackground.png"); //Loading the image
   araxxorBackgroundImage.resize(displayWidth, displayHeight); //Image Size
   image(araxxorBackgroundImage, 0, 0); //Image Position
-  
 }
 
 void BMBackground()
@@ -137,8 +132,7 @@ void BMBackground()
   
   BMB = loadImage("BMB.png"); //Loading the image
   BMB.resize(displayWidth, displayHeight); //Image Size
-  image(BMB, 0, 0); //Image Position
-  
+  image(BMB, 0, 0); //Image Position 
 }
 
 void YakamaruB()
@@ -147,10 +141,8 @@ void YakamaruB()
   
   YakaB = loadImage("YakamaruB.png"); //Loading the image
   YakaB.resize(displayWidth, displayHeight); //Image Size
-  image(YakaB, 0, 0); //Image Position
-  
+  image(YakaB, 0, 0); //Image Position 
 }
-
 
 void TelosCharacter()
 {
@@ -175,7 +167,6 @@ void AraxxorCharacter()
   imageMode(CENTER);
   image(araxxorImage, displayWidth / 2, displayHeight / 2,
                       displayWidth / 2, displayHeight / 2);
-
 }
 
 /* Method to load data from the telos file */
@@ -196,9 +187,8 @@ void telosDataLoader()
     
     telosArray.add(telosStatsHolder);
     
-  }//End for
-  
-}//End telosDataLoader()
+  } 
+}
 
 /* Method that Displays the text file */
 void telosDataPrint()
@@ -206,9 +196,8 @@ void telosDataPrint()
   for(Telos telosStatsHolder: telosArray)
   {
     println(telosStatsHolder);
-  }
-  
-}//End telosDataPrint()
+  }  
+}
 
 void loadingScreen()
 {
@@ -252,7 +241,7 @@ void loadingScreen()
     stroke(0);
   }
 
-}//End loadingScreen()
+}
 
 void startMenu()
 {
@@ -274,11 +263,11 @@ void startMenu()
         displayWidth / 1.59,
         displayHeight / 1.91); //Ending the game message.
         
-}//End startMenu()
+}
 
 void mousePressed() 
 {
-  if(!mouseOnbox) //If true
+  if(mouseOnbox == true) //If true
   {
     if(noMusicLoop == 0)
     {
@@ -330,7 +319,7 @@ void mousePressed()
   }
   
   //Character Menu Part (Araxxor)
-  if(mouseOnbox) //If true
+  if(mouseOnbox == true) //If true
   {
     if(charNoMusic == 0)
     {
@@ -373,4 +362,4 @@ void characterSelect()
         displayWidth / 1.69,
         displayHeight / 1.91); //My name message.
         
-}//End characterSelect()
+}
