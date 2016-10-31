@@ -8,48 +8,52 @@
 *  Due Date: 29th of November 2016.      *
 *                                        *
 ******************************************/
-  
+
+/* Menu Objects */
+MenuSelect selectStart;
+MenuSelect selectEnd;
+MenuSelect selectTelos;
+MenuSelect selectAraxxor;
+
 import processing.sound.*;
-SoundFile clickSound;
-SoundFile backgroundMusic;
+SoundFile clickSound; //Clicking Sound.
+SoundFile backgroundMusic; //Intro Music.
 
 /* Global Variables */
 /* Variables for reading for stats */
 ArrayList<Telos> telosArray = new ArrayList<Telos>(); //Expense Class
 
 /* Variables for Game State */
-int projectState = 0;
-int menuAdvance = 0;
+int menuAdvance = 0; //Advance variable from menu options.
 int noMusicLoop = 0; //Making sure the music doesn't loop.
-int charNoMusic = 0; //Making sure you can't hear the click again.
-int telosAdv = 0;
-int raxAdv = 0;
+int charNoMusic = 0; //Making sure you can't hear the click again for second menu.
+int telosAdv = 0; //Character state for Telos
+int raxAdv = 0; //Character state for Araxxor
 
 /*Variables for Loading Screen */
 int movingSpeed = 0; //Speed the loading bar moves.
-//int timeMove = millis(); Problem
 
 /* Boolean Variables for the Introduction Menu */
-boolean mouseOnbox1 = false; //Variable to check if the mouse is on the box.
-boolean mousePressedOnbox1 = false; //Variable to highlight if box is pressed.
-boolean mouseOnbox2 = false; //Variable to check if the mouse is on the box.
-boolean mousePressedOnbox2 = false; //Variable to highlight if box is pressed.
-
-/* Boolean Variables for the Character Menu */
-boolean telosBox = false; //Variable to check if the mouse is on the box.
-boolean telosBoxPressed = false; //Variable to highlight if box is pressed.
-boolean araxxorBox = false; //Variable to check if the mouse is on the box.
-boolean araxxorBoxPressed = false; //Variable to highlight if box is pressed.
+boolean mouseOnbox = false; //Variable to check if the mouse is on the box.
+boolean mousePressedOnbox = false; //Variable to highlight if box is pressed.
 
 void setup()
 {
   //size(displayWidth, displayHeight); //Edit out for now..
   fullScreen(); //Goes fullscreen.
+  smooth();
+  selectStart = new MenuSelect(width/3.0, height/2.0, 100, 50);
+  selectEnd = new MenuSelect(width/1.5, height/2.0, 100, 50);
+  selectTelos = new MenuSelect(width/3.0, height/2.0, 100, 50);
+  selectAraxxor = new MenuSelect(width/1.5, height/2.0, 100, 50);
+  //telosDataPrint();
  
 }
 
 void draw()
-{
+{ 
+  int timeMove = millis(); //Problem
+  
   if(menuAdvance == 0)
   {
     startMenu();
@@ -58,8 +62,7 @@ void draw()
   if(menuAdvance == 1)
   {
     //timeMove = 0; //Setting it back to 0 seconds. Problem
-    
-    if(millis() > 5000) //5 seconds
+    if(timeMove > 5000) //5 seconds
     {
       BackgroundStart();
     } 
@@ -69,22 +72,22 @@ void draw()
     }
     
     
-    if(millis() > 7000) //7 seconds
+    if(timeMove > 7000) //7 seconds
     {
       BAraxxorStart();
     }
     
-    if(millis() > 9000) //9 seconds
+    if(timeMove > 9000) //9 seconds
     {
       BMBackground();
     }
     
-    if(millis() > 11000) //11 seconds
+    if(timeMove > 11000) //11 seconds
     {
       YakamaruB();
     }
     
-    if(millis() > 15000) //15 seconds
+    if(timeMove > 15000) //15 seconds
     {
       clear(); //Clears the introduction images.
       backgroundMusic.stop(); //Stops the background music.
@@ -253,102 +256,33 @@ void loadingScreen()
 
 void startMenu()
 {
-  /* Variables for Start Menu (Box 1) */
-  float box1XPoint; //Variable for the X Position.
-  float box1YPoint; //Variable for the Y Position.
-  int sizeOfbox1 = 100; //Variable for the size of the box
-  int box1Curve = 50; //Variable for the curve of the box.
-  
-  /* Variables for Start Menu (Box 1) */
-  float box2XPoint; //Variable for the X Position.
-  float box2YPoint; //Variable for the Y Position.
-  int sizeOfbox2 = 100; //Variable for the size of the box
-  int box2Curve = 50; //Variable for the curve of the box.
-  
   background(0,0,0,255); //Background colour.
   fill(255);
   
-  /* For Option 1 */
   textSize(50); //Text size for my name.
   text("Gabriel Grimberg", 
         displayWidth / 2.9,
-        displayHeight / 3.5); //My name message.       
-  box1XPoint = width/3.0; //X Position of box.
-  box1YPoint = height/2.0; //Y Position of box.
+        displayHeight / 3.5); //My name message.
   
-  rectMode(RADIUS);
-  
-  if(mouseX > box1XPoint - sizeOfbox1 &&  //If statement to check
-     mouseX < box1XPoint + sizeOfbox1 &&  //If the mouse is anywhere
-     mouseY > box1YPoint - sizeOfbox1 &&  //near the box.
-     mouseY < box1YPoint + sizeOfbox1)    
-  {
-    mouseOnbox1 = true; //Set true, continue to mousePressed()
-    
-    if(!mousePressedOnbox1) 
-    { 
-      stroke(255);
-      fill(153); 
-    } 
-  } 
-  else 
-  {
-    stroke(153);
-    fill(153);
-    
-    mouseOnbox1 = false;
-  }
-  
-  //Drawing the box.
-  rect(box1XPoint, box1YPoint, sizeOfbox1, sizeOfbox1, box1Curve);
-  fill(0);
+  selectStart.selectDisplay(); //Start Object
   text("Start", 
         displayWidth / 3.5,
-        displayHeight / 1.91); //My name message.
-  
-  /* For Option 2 */      
-  box2XPoint = width/1.5; //X Position of box.
-  box2YPoint = height/2.0; //Y Position of box.
-  
-  rectMode(RADIUS);
-  
-  if(mouseX > box2XPoint - sizeOfbox2 &&  //If statement to check
-     mouseX < box2XPoint + sizeOfbox2 &&  //If the mouse is anywhere
-     mouseY > box2YPoint - sizeOfbox2 &&  //near the box.
-     mouseY < box2YPoint + sizeOfbox2)    
-  {
-    mouseOnbox2 = true; //Set true, continue to mousePressed()
-    
-    if(!mousePressedOnbox2) 
-    { 
-      stroke(255);
-      fill(153); 
-    } 
-  } 
-  else 
-  {
-    stroke(153);
-    fill(153);
-    
-    mouseOnbox2 = false;
-  }
-  
-  //Drawing the box.
-  rect(box2XPoint, box2YPoint, sizeOfbox2, sizeOfbox2, box2Curve);
-  fill(0);
+        displayHeight / 1.91); //Start the game message. 
+        
+  selectEnd.selectDisplay(); //End Object
   text("End", 
         displayWidth / 1.59,
-        displayHeight / 1.91); //My name message.
+        displayHeight / 1.91); //Ending the game message.
         
 }//End startMenu()
 
 void mousePressed() 
 {
-  if(mouseOnbox1) //If true
+  if(!mouseOnbox) //If true
   {
     if(noMusicLoop == 0)
     {
-      mousePressedOnbox1 = true; //Set variable to true
+      mousePressedOnbox = true; //Set variable to true
       fill(255, 255, 255); //To highlight the box.
       clickSound = new SoundFile(this, "Click.mp3");
       clickSound.play();
@@ -361,12 +295,12 @@ void mousePressed()
   } 
   else 
   {
-    mousePressedOnbox1 = false; //If not, set to false.
+    mousePressedOnbox = false; //If not, set to false.
   }
   
-  if(mouseOnbox2) //If true
+  if(mouseOnbox == true) //If true
   {     
-    mousePressedOnbox2 = true; //Set variable to true
+    mousePressedOnbox = true; //Set variable to true
     fill(255, 255, 255); //To highlight the box.
     clickSound = new SoundFile(this, "Click.mp3");
     clickSound.play();
@@ -374,15 +308,15 @@ void mousePressed()
   } 
   else 
   {
-    mousePressedOnbox1 = false; //If not, set to false.
+    mousePressedOnbox = false; //If not, set to false.
   }
   
   //Character Menu Part (Telos)
-  if(telosBox) //If true
+  if(mouseOnbox) //If true
   {
     if(charNoMusic == 0)
     {
-      telosBoxPressed = true; //Set variable to true
+      mousePressedOnbox = true; //Set variable to true
       fill(255, 255, 255); //To highlight the box.
       clickSound = new SoundFile(this, "Click.mp3");
       clickSound.play();
@@ -392,15 +326,15 @@ void mousePressed()
   } 
   else 
   {
-    telosBoxPressed = false; //If not, set to false.
+    mousePressedOnbox = false; //If not, set to false.
   }
   
   //Character Menu Part (Araxxor)
-  if(araxxorBox) //If true
+  if(mouseOnbox) //If true
   {
     if(charNoMusic == 0)
     {
-      araxxorBoxPressed = true; //Set variable to true
+      mousePressedOnbox = true; //Set variable to true
       fill(255, 255, 255); //To highlight the box.
       clickSound = new SoundFile(this, "Click.mp3");
       clickSound.play();
@@ -410,106 +344,33 @@ void mousePressed()
   } 
   else 
   {
-    araxxorBoxPressed = false; //If not, set to false.
+    mousePressedOnbox = false; //If not, set to false.
   }
 }
 
 void mouseReleased() 
 {
-  mousePressedOnbox1 = false; //If mouse released set it back to false.
-  mousePressedOnbox2 = false; //If mouse released set it back to false.
-  
-  telosBoxPressed = false; //If mouse released set it back to false.
-  araxxorBoxPressed = false; //If mouse released set it back to false.
+  mousePressedOnbox = false; //If mouse released set it back to false.
 }
 
 void characterSelect()
 {
-  /* Variables for Start Menu (Box 1) */
-  float telosXPoint; //Variable for the X Position.
-  float telosYPoint; //Variable for the Y Position.
-  int sizeTelos = 100; //Variable for the size of the box
-  int curveTelos = 50; //Variable for the curve of the box.
-  
-  /* Variables for Start Menu (Box 1) */
-  float raxXPoint; //Variable for the X Position.
-  float raxYPoint; //Variable for the Y Position.
-  int sizeRax = 100; //Variable for the size of the box
-  int curveRax = 50; //Variable for the curve of the box.
-  
   background(0,0,0,255); //Background colour.
   fill(255);
   
-  /* For Option 1 */
   textSize(50); //Text size for my name.
   text("Select your character:", 
         displayWidth / 2.9,
         displayHeight / 3.5); //My name message.       
-  telosXPoint = width/3.0; //X Position of box.
-  telosYPoint = height/2.0; //Y Position of box.
-  
-  rectMode(RADIUS);
-  
-  if(mouseX > telosXPoint - sizeTelos &&  //If statement to check
-     mouseX < telosXPoint + sizeTelos &&  //If the mouse is anywhere
-     mouseY > telosYPoint - sizeTelos &&  //near the box.
-     mouseY < telosYPoint + sizeTelos)    
-  {
-    telosBox = true; //Set true, continue to mousePressed()
-    
-    if(!telosBoxPressed) 
-    { 
-      stroke(255);
-      fill(153); 
-    } 
-  } 
-  else 
-  {
-    stroke(153);
-    fill(153);
-    
-    telosBox = false;
-  }
-  
-  //Drawing the box.
-  rect(telosXPoint, telosYPoint, sizeTelos, sizeTelos, curveTelos);
-  fill(0);
+
+  selectTelos.selectDisplay(); //Telos Object
   text("Telos", 
         displayWidth / 3.5,
         displayHeight / 1.91); //My name message.
-  
-  /* For Option 2 */      
-  raxXPoint = width/1.5; //X Position of box.
-  raxYPoint = height/2.0; //Y Position of box.
-  
-  rectMode(RADIUS);
-  
-  if(mouseX > raxXPoint - sizeRax &&  //If statement to check
-     mouseX < raxXPoint + sizeRax &&  //If the mouse is anywhere
-     mouseY > raxYPoint - sizeRax &&  //near the box.
-     mouseY < raxYPoint + sizeRax)    
-  {
-    araxxorBox = true; //Set true, continue to mousePressed()
-    
-    if(!araxxorBoxPressed) 
-    { 
-      stroke(255);
-      fill(153); 
-    } 
-  } 
-  else 
-  {
-    stroke(153);
-    fill(153);
-    
-    araxxorBox = false;
-  }
-  
-  //Drawing the box.
-  rect(raxXPoint, raxYPoint, sizeRax, sizeRax, curveRax);
-  fill(0);
+        
+  selectAraxxor.selectDisplay(); //Araxxor Object
   text("Araxxor", 
-        displayWidth / 1.59,
+        displayWidth / 1.69,
         displayHeight / 1.91); //My name message.
         
 }//End characterSelect()
