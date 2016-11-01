@@ -10,10 +10,11 @@
 ******************************************/
 
 /* Menu Objects */
-MenuSelect selectStart;
-MenuSelect selectEnd;
-MenuSelect selectTelos;
-MenuSelect selectAraxxor;
+MenuSelect selectStart;    //Object for Start Menu
+MenuSelect selectEnd;      //Object for End Menu
+MenuSelect selectTelos;    //Object for Telos Menu
+MenuSelect selectAraxxor;  //Object for Araxxor Menu
+LoadingScreen loadingWait; //Object for Loading Bar
 
 import processing.sound.*;
 SoundFile clickSound; //Clicking Sound.
@@ -42,10 +43,14 @@ void setup()
   //size(displayWidth, displayHeight); //Edit out for now..
   fullScreen(); //Goes fullscreen.
   smooth();
+  
+  /* Creating new Objects */
   selectStart = new MenuSelect(width/3.0, height/2.0, 100, 50);
   selectEnd = new MenuSelect(width/1.5, height/2.0, 100, 50);
   selectTelos = new MenuSelect(width/3.0, height/2.0, 100, 50);
   selectAraxxor = new MenuSelect(width/1.5, height/2.0, 100, 50);
+  loadingWait = new LoadingScreen(200);
+  
   //telosDataPrint();
  
 }
@@ -201,10 +206,6 @@ void telosDataPrint()
 
 void loadingScreen()
 {
-  int sizeofBar = 200; //Size of the moving bar.
-  
-  for(movingSpeed = movingSpeed + 10; movingSpeed > 1000; movingSpeed = 10);
-  {
     background(0,0,0,255); //Background colour.
     fill(255);
     textSize(60); //Text size for loading.
@@ -214,33 +215,7 @@ void loadingScreen()
     fill(0,255,0); //Colour of bar
     stroke(0);
     
-    quad(0 + movingSpeed, displayHeight / 1.6,
-         sizeofBar + movingSpeed, displayHeight / 1.6,
-         sizeofBar+movingSpeed, displayHeight / 1.456,
-         0 + movingSpeed, displayHeight / 1.456); //Moving bar
-         
-    fill(0);
-    
-    quad(1500,displayHeight / 1.6,
-         985,displayHeight / 1.6,
-         985,displayHeight / 1.456,
-         1500,displayHeight / 1.456); //Back to start
-         
-    quad(0, displayHeight / 1.6,
-         displayWidth / 4.25,displayHeight / 1.6,
-         displayWidth / 4.25,displayHeight / 1.456,
-         0,displayHeight / 1.456); //Start from start
-         
-    noFill();
-    stroke(255);
-    
-    quad(displayWidth / 4.25 ,displayHeight / 1.6,
-         displayWidth / 1.3, displayHeight / 1.6,
-         displayWidth / 1.3, displayHeight / 1.456,
-         displayWidth / 4.25,displayHeight / 1.456); //The outter box
-    stroke(0);
-  }
-
+    loadingWait.loadingNow();
 }
 
 void startMenu()
@@ -267,7 +242,7 @@ void startMenu()
 
 void mousePressed() 
 {
-  if(mouseOnbox == true) //If true
+  if(!mouseOnbox == true) //If true
   {
     if(noMusicLoop == 0)
     {
@@ -301,7 +276,7 @@ void mousePressed()
   }
   
   //Character Menu Part (Telos)
-  if(mouseOnbox) //If true
+  if(mouseOnbox == true) //If true
   {
     if(charNoMusic == 0)
     {
@@ -360,6 +335,5 @@ void characterSelect()
   selectAraxxor.selectDisplay(); //Araxxor Object
   text("Araxxor", 
         displayWidth / 1.69,
-        displayHeight / 1.91); //My name message.
-        
+        displayHeight / 1.91); //My name message.      
 }
