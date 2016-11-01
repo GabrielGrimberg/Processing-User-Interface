@@ -108,7 +108,13 @@ void draw()
     {
       YakamaruB();
     }
-    
+    if(rollingTheTime > 15)
+    {
+      menuAdvance = 2;
+    }
+      break;
+      
+    case 2:
     if(rollingTheTime > 15) //15 seconds
     {
       clear(); //Clears the introduction images.
@@ -274,7 +280,7 @@ void mousePressed()
       backgroundMusic.play();
       menuAdvance = 1; //Setting to 1 so it doesn't overlap.
       noMusicLoop = 1; //Making sure the music doesn't break.
-      timeAccumulator = 0;
+      rollingTheTime = 0;
     }
   } 
   else 
