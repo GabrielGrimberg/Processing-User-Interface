@@ -50,6 +50,11 @@ boolean mousePressedOnbox3 = false; //Variable to highlight if box is pressed.
 boolean mouseOnbox4 = false; //Variable to check if the mouse is on the box.
 boolean mousePressedOnbox4 = false; //Variable to highlight if box is pressed.
 
+/* Time Movement Variables */
+float timeDelta = 0;
+float rollingTheTime = 0;
+int resetTime = 0;
+
 void setup()
 {
   //size(displayWidth, displayHeight); //Edit out for now..
@@ -68,7 +73,11 @@ void setup()
 
 void draw()
 {
-  int timeMove = millis(); //Problem
+  int programTimeRun = millis();
+  timeDelta = (programTimeRun - resetTime) / 1000.0f;  
+  resetTime = programTimeRun;
+  
+  rollingTheTime += timeDelta;
   
   switch(menuAdvance)
   {
@@ -76,8 +85,7 @@ void draw()
       startMenu();;
       break;
     case 1:
-    //timeMove = 0; //Setting it back to 0 seconds. Problem
-    if(timeMove > 5000) //5 seconds
+    if(rollingTheTime > 5) //5 seconds
     {
       BackgroundStart();
     } 
@@ -86,27 +94,27 @@ void draw()
       loadingScreen();
     }
     
-    if(timeMove > 7000) //7 seconds
+    if(rollingTheTime > 7) //7 seconds
     {
       BAraxxorStart();
     }
     
-    if(timeMove > 9000) //9 seconds
+    if(rollingTheTime > 9) //9 seconds
     {
       BMBackground();
     }
     
-    if(timeMove > 11000) //11 seconds
+    if(rollingTheTime > 11) //11 seconds
     {
       YakamaruB();
     }
     
-    if(timeMove > 15000) //15 seconds
+    if(rollingTheTime > 15) //15 seconds
     {
       clear(); //Clears the introduction images.
       backgroundMusic.stop(); //Stops the background music.
       characterSelect();
-    }
+    } 
     
     if(telosAdv == 1)
     {
@@ -266,6 +274,7 @@ void mousePressed()
       backgroundMusic.play();
       menuAdvance = 1; //Setting to 1 so it doesn't overlap.
       noMusicLoop = 1; //Making sure the music doesn't break.
+      timeAccumulator = 0;
     }
   } 
   else 
