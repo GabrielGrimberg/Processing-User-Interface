@@ -14,7 +14,7 @@ class MenuSelect
     this.boxCurve = boxCurve;
   }
   
-  void selectDisplay()
+  void selectDisplay1()
   {
     rectMode(RADIUS);
     
@@ -24,9 +24,9 @@ class MenuSelect
        mouseY < boxYPoint + sizeOfbox)    
        
     {
-      mouseOnbox = true; //Set true, continue to mousePressed()
+      mouseOnbox1 = true; //Set true, continue to mousePressed()
     
-    if(mousePressedOnbox == false) 
+    if(mousePressedOnbox1 == false) 
     { 
       stroke(255);
       fill(204, 102, 0);
@@ -37,7 +37,100 @@ class MenuSelect
     stroke(153);
     fill(153);
     
-    mouseOnbox = false;
+    mouseOnbox1 = false;
+  }
+  
+  //Drawing the box.
+  rect(boxXPoint, boxYPoint, sizeOfbox, sizeOfbox, boxCurve);
+  fill(0);
+  }
+  
+  void selectDisplay2()
+  {
+    rectMode(RADIUS);
+    
+    if(mouseX > boxXPoint - sizeOfbox &&  //If statement to check
+       mouseX < boxXPoint + sizeOfbox &&  //If the mouse is anywhere
+       mouseY > boxYPoint - sizeOfbox &&  //near the box.
+       mouseY < boxYPoint + sizeOfbox)    
+       
+    {
+      mouseOnbox2 = true; //Set true, continue to mousePressed()
+    
+    if(mousePressedOnbox2 == false) 
+    { 
+      stroke(255);
+      fill(204, 102, 0);
+    } 
+  } 
+  else 
+  {
+    stroke(153);
+    fill(153);
+    
+    mouseOnbox2 = false;
+  }
+  
+  //Drawing the box.
+  rect(boxXPoint, boxYPoint, sizeOfbox, sizeOfbox, boxCurve);
+  fill(0);
+  }
+  
+  void selectDisplay3()
+  {
+    rectMode(RADIUS);
+    
+    if(mouseX > boxXPoint - sizeOfbox &&  //If statement to check
+       mouseX < boxXPoint + sizeOfbox &&  //If the mouse is anywhere
+       mouseY > boxYPoint - sizeOfbox &&  //near the box.
+       mouseY < boxYPoint + sizeOfbox)    
+       
+    {
+      mouseOnbox3 = true; //Set true, continue to mousePressed()
+    
+    if(mousePressedOnbox3 == false) 
+    { 
+      stroke(255);
+      fill(204, 102, 0);
+    } 
+  } 
+  else 
+  {
+    stroke(153);
+    fill(153);
+    
+    mouseOnbox3 = false;
+  }
+  
+  //Drawing the box.
+  rect(boxXPoint, boxYPoint, sizeOfbox, sizeOfbox, boxCurve);
+  fill(0);
+  }
+  
+  void selectDisplay4()
+  {
+    rectMode(RADIUS);
+    
+    if(mouseX > boxXPoint - sizeOfbox &&  //If statement to check
+       mouseX < boxXPoint + sizeOfbox &&  //If the mouse is anywhere
+       mouseY > boxYPoint - sizeOfbox &&  //near the box.
+       mouseY < boxYPoint + sizeOfbox)    
+       
+    {
+      mouseOnbox4 = true; //Set true, continue to mousePressed()
+    
+    if(mousePressedOnbox4 == false) 
+    { 
+      stroke(255);
+      fill(204, 102, 0);
+    } 
+  } 
+  else 
+  {
+    stroke(153);
+    fill(153);
+    
+    mouseOnbox4 = false;
   }
   
   //Drawing the box.

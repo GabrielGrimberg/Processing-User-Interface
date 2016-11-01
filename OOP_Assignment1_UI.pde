@@ -34,9 +34,21 @@ int raxAdv = 0; //Character state for Araxxor
 /*Variables for Loading Screen */
 int movingSpeed = 0; //Speed the loading bar moves.
 
-/* Boolean Variables for the Introduction Menu */
-boolean mouseOnbox = false; //Variable to check if the mouse is on the box.
-boolean mousePressedOnbox = false; //Variable to highlight if box is pressed.
+/* Boolean Variables for the Start Menu */
+boolean mouseOnbox1 = false; //Variable to check if the mouse is on the box.
+boolean mousePressedOnbox1 = false; //Variable to highlight if box is pressed.
+  
+/* Boolean Variables for the End Menu */
+boolean mouseOnbox2 = false; //Variable to check if the mouse is on the box.
+boolean mousePressedOnbox2 = false; //Variable to highlight if box is pressed.
+    
+/* Boolean Variables for the Telos Menu */
+boolean mouseOnbox3 = false; //Variable to check if the mouse is on the box.
+boolean mousePressedOnbox3 = false; //Variable to highlight if box is pressed.
+  
+/* Boolean Variables for the Araxxor Menu */
+boolean mouseOnbox4 = false; //Variable to check if the mouse is on the box.
+boolean mousePressedOnbox4 = false; //Variable to highlight if box is pressed.
 
 void setup()
 {
@@ -52,7 +64,6 @@ void setup()
   loadingWait = new LoadingScreen(200);
   
   //telosDataPrint();
- 
 }
 
 void draw()
@@ -228,12 +239,12 @@ void startMenu()
         displayWidth / 2.9,
         displayHeight / 3.5); //My name message.
   
-  selectStart.selectDisplay(); //Start Object
+  selectStart.selectDisplay1(); //Start Object
   text("Start", 
         displayWidth / 3.5,
         displayHeight / 1.91); //Start the game message. 
         
-  selectEnd.selectDisplay(); //End Object
+  selectEnd.selectDisplay2(); //End Object
   text("End", 
         displayWidth / 1.59,
         displayHeight / 1.91); //Ending the game message.
@@ -242,11 +253,11 @@ void startMenu()
 
 void mousePressed() 
 {
-  if(!mouseOnbox == true) //If true
+  if(mouseOnbox1 == true) //If true
   {
     if(noMusicLoop == 0)
     {
-      mousePressedOnbox = true; //Set variable to true
+      mousePressedOnbox1 = true; //Set variable to true
       fill(255, 255, 255); //To highlight the box.
       clickSound = new SoundFile(this, "Click.mp3");
       clickSound.play();
@@ -259,12 +270,12 @@ void mousePressed()
   } 
   else 
   {
-    mousePressedOnbox = false; //If not, set to false.
+    mousePressedOnbox1 = false; //If not, set to false.
   }
   
-  if(mouseOnbox == true) //If true
+  if(mouseOnbox2 == true) //If true
   {     
-    mousePressedOnbox = true; //Set variable to true
+    mousePressedOnbox2 = true; //Set variable to true
     fill(255, 255, 255); //To highlight the box.
     clickSound = new SoundFile(this, "Click.mp3");
     clickSound.play();
@@ -272,15 +283,15 @@ void mousePressed()
   } 
   else 
   {
-    mousePressedOnbox = false; //If not, set to false.
+    mousePressedOnbox2 = false; //If not, set to false.
   }
   
   //Character Menu Part (Telos)
-  if(mouseOnbox == true) //If true
+  if(mouseOnbox3 == true) //If true
   {
     if(charNoMusic == 0)
     {
-      mousePressedOnbox = true; //Set variable to true
+      mousePressedOnbox3 = true; //Set variable to true
       fill(255, 255, 255); //To highlight the box.
       clickSound = new SoundFile(this, "Click.mp3");
       clickSound.play();
@@ -290,15 +301,15 @@ void mousePressed()
   } 
   else 
   {
-    mousePressedOnbox = false; //If not, set to false.
+    mousePressedOnbox3 = false; //If not, set to false.
   }
   
   //Character Menu Part (Araxxor)
-  if(mouseOnbox == true) //If true
+  if(mouseOnbox4 == true) //If true
   {
     if(charNoMusic == 0)
     {
-      mousePressedOnbox = true; //Set variable to true
+      mousePressedOnbox4 = true; //Set variable to true
       fill(255, 255, 255); //To highlight the box.
       clickSound = new SoundFile(this, "Click.mp3");
       clickSound.play();
@@ -308,13 +319,16 @@ void mousePressed()
   } 
   else 
   {
-    mousePressedOnbox = false; //If not, set to false.
+    mousePressedOnbox4 = false; //If not, set to false.
   }
 }
 
 void mouseReleased() 
 {
-  mousePressedOnbox = false; //If mouse released set it back to false.
+  mousePressedOnbox1 = false; //If mouse released set it back to false.
+  mousePressedOnbox2 = false; //If mouse released set it back to false.
+  mousePressedOnbox3 = false; //If mouse released set it back to false.
+  mousePressedOnbox4 = false; //If mouse released set it back to false.
 }
 
 void characterSelect()
@@ -327,12 +341,12 @@ void characterSelect()
         displayWidth / 2.9,
         displayHeight / 3.5); //My name message.       
 
-  selectTelos.selectDisplay(); //Telos Object
+  selectTelos.selectDisplay3(); //Telos Object
   text("Telos", 
         displayWidth / 3.5,
         displayHeight / 1.91); //My name message.
         
-  selectAraxxor.selectDisplay(); //Araxxor Object
+  selectAraxxor.selectDisplay4(); //Araxxor Object
   text("Araxxor", 
         displayWidth / 1.69,
         displayHeight / 1.91); //My name message.      
