@@ -164,7 +164,7 @@ void BAraxxorStart()
 {
   PImage araxxorBackgroundImage; //Image Variable
   
-  araxxorBackgroundImage = loadImage("AraxxorBackground.png"); //Loading the image
+  araxxorBackgroundImage = loadImage("rax.jpg"); //Loading the image
   araxxorBackgroundImage.resize(displayWidth, displayHeight); //Image Size
   image(araxxorBackgroundImage,0,0,displayWidth + cameraZoomRax,displayHeight + cameraZoomRax); //Image Position
   cameraZoomRax += 1; //Image movement speed.
@@ -174,7 +174,7 @@ void BMBackground()
 {
   PImage BMB; //Image Variable
   
-  BMB = loadImage("BMB.png"); //Loading the image
+  BMB = loadImage("Nomad.jpg"); //Loading the image
   BMB.resize(displayWidth, displayHeight); //Image Size
   image(BMB,0,0,displayWidth + cameraZoomBM,displayHeight + cameraZoomBM); //Image Position
   cameraZoomBM += 1; //Image movement speed.
@@ -184,7 +184,7 @@ void YakamaruB()
 {
   PImage YakaB; //Image Variable
   
-  YakaB = loadImage("YakamaruB.png"); //Loading the image
+  YakaB = loadImage("KK.jpg"); //Loading the image
   YakaB.resize(displayWidth, displayHeight); //Image Size
   image(YakaB,0,0,displayWidth + cameraZoomYaka,displayHeight + cameraZoomYaka); //Image Position
   cameraZoomYaka += 1; //Image movement speed.
