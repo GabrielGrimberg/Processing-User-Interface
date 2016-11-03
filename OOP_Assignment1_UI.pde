@@ -55,6 +55,13 @@ float timeDelta = 0;
 float rollingTheTime = 0;
 int resetTime = 0;
 
+/* Background Movement Speed Variables */
+float cameraZoomTelos;
+float cameraZoomRax;
+float cameraZoomBM;
+float cameraZoomYaka;
+
+
 void setup()
 {
   //size(displayWidth, displayHeight); //Edit out for now..
@@ -144,7 +151,8 @@ void BackgroundStart()
   
   telosBackgroundImage = loadImage("TelosBackground.jpg"); //Loading the image
   telosBackgroundImage.resize(displayWidth, displayHeight); //Image Size
-  image(telosBackgroundImage, 0, 0); //Image Position 
+  image(telosBackgroundImage,0,0,displayWidth + cameraZoomTelos,displayHeight + cameraZoomTelos); //Image Position 
+  cameraZoomTelos += 1.5; //Image movement speed.
 }
 
 void BAraxxorStart()
@@ -153,7 +161,8 @@ void BAraxxorStart()
   
   araxxorBackgroundImage = loadImage("AraxxorBackground.png"); //Loading the image
   araxxorBackgroundImage.resize(displayWidth, displayHeight); //Image Size
-  image(araxxorBackgroundImage, 0, 0); //Image Position
+  image(araxxorBackgroundImage,0,0,displayWidth + cameraZoomRax,displayHeight + cameraZoomRax); //Image Position
+  cameraZoomRax += 1.5; //Image movement speed.
 }
 
 void BMBackground()
@@ -162,7 +171,8 @@ void BMBackground()
   
   BMB = loadImage("BMB.png"); //Loading the image
   BMB.resize(displayWidth, displayHeight); //Image Size
-  image(BMB, 0, 0); //Image Position 
+  image(BMB,0,0,displayWidth + cameraZoomBM,displayHeight + cameraZoomBM); //Image Position
+  cameraZoomBM += 1.5; //Image movement speed.
 }
 
 void YakamaruB()
@@ -171,7 +181,8 @@ void YakamaruB()
   
   YakaB = loadImage("YakamaruB.png"); //Loading the image
   YakaB.resize(displayWidth, displayHeight); //Image Size
-  image(YakaB, 0, 0); //Image Position 
+  image(YakaB,0,0,displayWidth + cameraZoomYaka,displayHeight + cameraZoomYaka); //Image Position
+  cameraZoomYaka += 1.5; //Image movement speed.
 }
 
 void TelosCharacter()
