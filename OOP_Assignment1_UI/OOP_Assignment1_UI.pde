@@ -283,75 +283,10 @@ void startMenu()
 
 void mousePressed() 
 {
-  if(mouseOnbox1 == true) //If true
-  {
-    if(noMusicLoop == 0)
-    {
-      mousePressedOnbox1 = true; //Set variable to true
-      fill(255, 255, 255); //To highlight the box.
-      clickSound = new SoundFile(this, "Click.mp3");
-      clickSound.play();
-    
-      backgroundMusic = new  SoundFile(this, "BMusic.mp3");
-      backgroundMusic.play();
-      menuAdvance = 1; //Setting to 1 so it doesn't overlap.
-      noMusicLoop = 1; //Making sure the music doesn't break.
-      rollingTheTime = 0;
-    }
-  } 
-  else 
-  {
-    mousePressedOnbox1 = false; //If not, set to false.
-  }
-  
-  if(mouseOnbox2 == true) //If true
-  {     
-    mousePressedOnbox2 = true; //Set variable to true
-    fill(255, 255, 255); //To highlight the box.
-    clickSound = new SoundFile(this, "Click.mp3");
-    clickSound.play();
-    exit(); //Terminating the program
-  } 
-  else 
-  {
-    mousePressedOnbox2 = false; //If not, set to false.
-  }
-  
-  //Character Menu Part (Telos)
-  if(mouseOnbox3 == true) //If true
-  {
-    if(charNoMusic == 0)
-    {
-      mousePressedOnbox3 = true; //Set variable to true
-      fill(255, 255, 255); //To highlight the box.
-      clickSound = new SoundFile(this, "Click.mp3");
-      clickSound.play();
-      charNoMusic = 1;
-      telosAdv = 1;
-    }
-  } 
-  else 
-  {
-    mousePressedOnbox3 = false; //If not, set to false.
-  }
-  
-  //Character Menu Part (Araxxor)
-  if(mouseOnbox4 == true) //If true
-  {
-    if(charNoMusic == 0)
-    {
-      mousePressedOnbox4 = true; //Set variable to true
-      fill(255, 255, 255); //To highlight the box.
-      clickSound = new SoundFile(this, "Click.mp3");
-      clickSound.play();
-      charNoMusic = 1;
-      raxAdv = 1;
-    }
-  } 
-  else 
-  {
-    mousePressedOnbox4 = false; //If not, set to false.
-  }
+  mouseClickStart();  //For the Start Option (Menu 1)
+  mouseClickEnd();    //For the End Option (Menu 1)
+  mouseClickTelos();  //For the Telos Option (Menu 2)
+  mouseClickAraxxor();//For the Araxxor Option (Menu 2)
 }
 
 void mouseReleased() 
@@ -381,4 +316,86 @@ void characterSelect()
   text("Araxxor", 
         displayWidth / 1.69,
         displayHeight / 1.91); //My name message.      
+}
+
+void mouseClickStart()
+{
+  if(mouseOnbox1 == true) //If true
+  {
+    if(noMusicLoop == 0)
+    {
+      mousePressedOnbox1 = true; //Set variable to true
+      fill(255, 255, 255); //To highlight the box.
+      clickSound = new SoundFile(this, "Click.mp3");
+      clickSound.play();
+    
+      backgroundMusic = new  SoundFile(this, "BMusic.mp3");
+      backgroundMusic.play();
+      menuAdvance = 1; //Setting to 1 so it doesn't overlap.
+      noMusicLoop = 1; //Making sure the music doesn't break.
+      rollingTheTime = 0;
+    }
+  } 
+  else 
+  {
+    mousePressedOnbox1 = false; //If not, set to false.
+  }
+}
+
+void mouseClickEnd()
+{
+  if(mouseOnbox2 == true) //If true
+  {     
+    mousePressedOnbox2 = true; //Set variable to true
+    fill(255, 255, 255); //To highlight the box.
+    clickSound = new SoundFile(this, "Click.mp3");
+    clickSound.play();
+    exit(); //Terminating the program
+  } 
+  else 
+  {
+    mousePressedOnbox2 = false; //If not, set to false.
+  }
+}
+
+void mouseClickTelos()
+{
+ //Character Menu Part (Telos)
+  if(mouseOnbox3 == true) //If true
+  {
+    if(charNoMusic == 0)
+    {
+      mousePressedOnbox3 = true; //Set variable to true
+      fill(255, 255, 255); //To highlight the box.
+      clickSound = new SoundFile(this, "Click.mp3");
+      clickSound.play();
+      charNoMusic = 1;
+      telosAdv = 1;
+    }
+  } 
+  else 
+  {
+    mousePressedOnbox3 = false; //If not, set to false.
+  } 
+}
+
+void mouseClickAraxxor()
+{
+  //Character Menu Part (Araxxor)
+  if(mouseOnbox4 == true) //If true
+  {
+    if(charNoMusic == 0)
+    {
+      mousePressedOnbox4 = true; //Set variable to true
+      fill(255, 255, 255); //To highlight the box.
+      clickSound = new SoundFile(this, "Click.mp3");
+      clickSound.play();
+      charNoMusic = 1;
+      raxAdv = 1;
+    }
+  } 
+  else 
+  {
+    mousePressedOnbox4 = false; //If not, set to false.
+  }
 }
