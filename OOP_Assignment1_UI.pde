@@ -60,6 +60,7 @@ float cameraZoomTelos;
 float cameraZoomRax;
 float cameraZoomBM;
 float cameraZoomYaka;
+int noRepeatBG = 0; //Checker to stop the if statements which reduce the framerate.
 
 
 void setup()
@@ -92,7 +93,7 @@ void draw()
       startMenu();;
       break;
     case 1:
-    if(rollingTheTime > 5) //5 seconds
+    if(rollingTheTime > 5 && noRepeatBG == 0) //5 seconds
     {
       BackgroundStart();
     } 
@@ -101,28 +102,32 @@ void draw()
       loadingScreen();
     }
     
-    if(rollingTheTime > 7) //7 seconds
+    if(rollingTheTime > 10 && noRepeatBG == 0 || noRepeatBG == 1) //10 seconds
     {
+      noRepeatBG = 1;
       BAraxxorStart();
     }
     
-    if(rollingTheTime > 9) //9 seconds
+    if(rollingTheTime > 15 && noRepeatBG == 1 || noRepeatBG == 2) //15 seconds
     {
+      noRepeatBG = 2;
       BMBackground();
     }
     
-    if(rollingTheTime > 11) //11 seconds
+    if(rollingTheTime > 20 && noRepeatBG == 2 || noRepeatBG == 3) //20 seconds
     {
+      noRepeatBG = 3;
       YakamaruB();
     }
-    if(rollingTheTime > 15)
+    if(rollingTheTime > 25 && noRepeatBG == 3 || noRepeatBG == 4) //25 seconds
     {
-      menuAdvance = 2;
+      noRepeatBG = 4;
+      menuAdvance = 2; //Moving into character select.
     }
-      break;
+    break;
       
     case 2:
-    if(rollingTheTime > 15) //15 seconds
+    if(rollingTheTime > 25) //25 seconds
     {
       clear(); //Clears the introduction images.
       backgroundMusic.stop(); //Stops the background music.
@@ -152,7 +157,7 @@ void BackgroundStart()
   telosBackgroundImage = loadImage("TelosBackground.jpg"); //Loading the image
   telosBackgroundImage.resize(displayWidth, displayHeight); //Image Size
   image(telosBackgroundImage,0,0,displayWidth + cameraZoomTelos,displayHeight + cameraZoomTelos); //Image Position 
-  cameraZoomTelos += 1.5; //Image movement speed.
+  cameraZoomTelos += 1; //Image movement speed.
 }
 
 void BAraxxorStart()
@@ -162,7 +167,7 @@ void BAraxxorStart()
   araxxorBackgroundImage = loadImage("AraxxorBackground.png"); //Loading the image
   araxxorBackgroundImage.resize(displayWidth, displayHeight); //Image Size
   image(araxxorBackgroundImage,0,0,displayWidth + cameraZoomRax,displayHeight + cameraZoomRax); //Image Position
-  cameraZoomRax += 1.5; //Image movement speed.
+  cameraZoomRax += 1; //Image movement speed.
 }
 
 void BMBackground()
@@ -172,7 +177,7 @@ void BMBackground()
   BMB = loadImage("BMB.png"); //Loading the image
   BMB.resize(displayWidth, displayHeight); //Image Size
   image(BMB,0,0,displayWidth + cameraZoomBM,displayHeight + cameraZoomBM); //Image Position
-  cameraZoomBM += 1.5; //Image movement speed.
+  cameraZoomBM += 1; //Image movement speed.
 }
 
 void YakamaruB()
@@ -182,7 +187,7 @@ void YakamaruB()
   YakaB = loadImage("YakamaruB.png"); //Loading the image
   YakaB.resize(displayWidth, displayHeight); //Image Size
   image(YakaB,0,0,displayWidth + cameraZoomYaka,displayHeight + cameraZoomYaka); //Image Position
-  cameraZoomYaka += 1.5; //Image movement speed.
+  cameraZoomYaka += 1; //Image movement speed.
 }
 
 void TelosCharacter()
