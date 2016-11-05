@@ -62,6 +62,9 @@ float cameraZoomBM;
 float cameraZoomYaka;
 int noRepeatBG = 0; //Checker to stop the if statements which reduce the framerate.
 
+/* Variables for the return option. */ 
+float bendAmount = 20; //Used for the increase when mouse pointing away.
+
 
 void setup()
 {
@@ -278,6 +281,8 @@ void startMenu()
   text("End", 
         displayWidth / 1.59,
         displayHeight / 1.91); //Ending the game message.
+  
+  returnOption();
         
 }
 
@@ -397,5 +402,29 @@ void mouseClickAraxxor()
   else 
   {
     mousePressedOnbox4 = false; //If not, set to false.
+  }
+}
+
+void returnOption()
+{
+  //360, because angle is 360.
+  for(int i = 0; i < 360; i += 20)
+  {
+    float xPos = width/1.1+sin(radians(i)) * 40; //Size of X
+    float yPos = height/1.2+cos(radians(i)) * 40; //Size of Y
+    float Roating = map(dist(mouseX, mouseY, xPos, yPos), -100, 100, -bendAmount / 20, bendAmount /20);
+    
+    //Glow effect, still in work...
+    for(int mousePointing = 2; mousePointing > 0; mousePointing -= 2)
+    {
+      pushMatrix();
+
+      translate(xPos, yPos); //Fixed position
+      //rotate(radians(90) - atan2(mouseX-xPos, mouseY-yPos)); May leave out...
+      //Drawing the circle.
+      ellipse(-bendAmount, 0, mousePointing-Roating, mousePointing-Roating);
+      
+      popMatrix();
+    }
   }
 }
