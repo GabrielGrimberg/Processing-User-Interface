@@ -412,19 +412,16 @@ void returnOption()
   {
     float xPos = width/1.1+sin(radians(i)) * 40; //Size of X
     float yPos = height/1.2+cos(radians(i)) * 40; //Size of Y
-    float Roating = map(dist(mouseX, mouseY, xPos, yPos), -100, 100, -bendAmount / 20, bendAmount /20);
+    float Movement = map(dist(mouseX, mouseY, xPos, yPos), -100, 100, -bendAmount / 20, bendAmount /20);
     
     //Glow effect, still in work...
-    for(int mousePointing = 2; mousePointing > 0; mousePointing -= 2)
-    {
-      pushMatrix();
-
-      translate(xPos, yPos); //Fixed position
-      //rotate(radians(90) - atan2(mouseX-xPos, mouseY-yPos)); May leave out...
-      //Drawing the circle.
-      ellipse(-bendAmount, 0, mousePointing-Roating, mousePointing-Roating);
-      
-      popMatrix();
-    }
+    pushMatrix();
+    translate(xPos, yPos); //Fixed position
+    //rotate(radians(90) - atan2(mouseX-xPos, mouseY-yPos)); //May leave out...
+    
+    //Drawing the circle.
+    ellipse(-bendAmount, 0, Movement, Movement);
+    popMatrix();
   }
+  
 }
