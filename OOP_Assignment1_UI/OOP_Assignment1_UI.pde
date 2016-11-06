@@ -58,8 +58,9 @@ int resetTime = 0;
 /* Background Movement Speed Variables */
 float cameraZoomTelos;
 float cameraZoomRax;
+float cameraZoomNomad;
 float cameraZoomBM;
-float cameraZoomYaka;
+float cameraZoomVind;
 int noRepeatBG = 0; //Checker to stop the if statements which reduce the framerate.
 
 /* Variables for the return option. */ 
@@ -98,7 +99,7 @@ void draw()
     case 1:
     if(rollingTheTime > 5 && noRepeatBG == 0) //5 seconds
     {
-      BackgroundStart();
+      startTelos();
     } 
     else
     {
@@ -108,29 +109,34 @@ void draw()
     if(rollingTheTime > 10 && noRepeatBG == 0 || noRepeatBG == 1) //10 seconds
     {
       noRepeatBG = 1;
-      BAraxxorStart();
+      Araxxor();
     }
     
     if(rollingTheTime > 15 && noRepeatBG == 1 || noRepeatBG == 2) //15 seconds
     {
       noRepeatBG = 2;
-      BMBackground();
+      Nomad();
     }
     
     if(rollingTheTime > 20 && noRepeatBG == 2 || noRepeatBG == 3) //20 seconds
     {
       noRepeatBG = 3;
-      YakamaruB();
+      BM();
     }
-    if(rollingTheTime > 25 && noRepeatBG == 3 || noRepeatBG == 4) //25 seconds
+    if(rollingTheTime > 25 && noRepeatBG == 3 || noRepeatBG == 4) //20 seconds
     {
       noRepeatBG = 4;
+      Vind();
+    }
+    if(rollingTheTime > 30 && noRepeatBG == 4 || noRepeatBG == 5) //25 seconds
+    {
+      noRepeatBG = 5;
       menuAdvance = 2; //Moving into character select.
     }
     break;
       
     case 2:
-    if(rollingTheTime > 25) //25 seconds
+    if(rollingTheTime > 30) //25 seconds
     {
       clear(); //Clears the introduction images.
       backgroundMusic.stop(); //Stops the background music.
@@ -153,44 +159,54 @@ void draw()
   
 }
 
-void BackgroundStart()
+void startTelos()
 {
-  PImage telosBackgroundImage; //Image Variable
+  PImage telosPic; //Image Variable
   
-  telosBackgroundImage = loadImage("TelosBackground.jpg"); //Loading the image
-  telosBackgroundImage.resize(displayWidth, displayHeight); //Image Size
-  image(telosBackgroundImage,0,0,displayWidth + cameraZoomTelos,displayHeight + cameraZoomTelos); //Image Position 
+  telosPic = loadImage("TelosBackground.jpg"); //Loading the image
+  telosPic.resize(displayWidth, displayHeight); //Image Size
+  image(telosPic,0,0,displayWidth + cameraZoomTelos,displayHeight + cameraZoomTelos); //Image Position 
   cameraZoomTelos += 1; //Image movement speed.
 }
 
-void BAraxxorStart()
+void Araxxor()
 {
-  PImage araxxorBackgroundImage; //Image Variable
+  PImage araxxorPic; //Image Variable
   
-  araxxorBackgroundImage = loadImage("rax.jpg"); //Loading the image
-  araxxorBackgroundImage.resize(displayWidth, displayHeight); //Image Size
-  image(araxxorBackgroundImage,0,0,displayWidth + cameraZoomRax,displayHeight + cameraZoomRax); //Image Position
+  araxxorPic = loadImage("rax.jpg"); //Loading the image
+  araxxorPic.resize(displayWidth, displayHeight); //Image Size
+  image(araxxorPic,0,0,displayWidth + cameraZoomRax,displayHeight + cameraZoomRax); //Image Position
   cameraZoomRax += 1; //Image movement speed.
 }
 
-void BMBackground()
+void Nomad()
 {
-  PImage BMB; //Image Variable
+  PImage nomadPic; //Image Variable
   
-  BMB = loadImage("Nomad.jpg"); //Loading the image
-  BMB.resize(displayWidth, displayHeight); //Image Size
-  image(BMB,0,0,displayWidth + cameraZoomBM,displayHeight + cameraZoomBM); //Image Position
+  nomadPic = loadImage("Nomad.jpg"); //Loading the image
+  nomadPic.resize(displayWidth, displayHeight); //Image Size
+  image(nomadPic,0,0,displayWidth + cameraZoomNomad,displayHeight + cameraZoomNomad); //Image Position
+  cameraZoomNomad += 1; //Image movement speed.
+}
+
+void BM()
+{
+  PImage BMPic; //Image Variable
+  
+  BMPic = loadImage("BM.jpg"); //Loading the image
+  BMPic.resize(displayWidth, displayHeight); //Image Size
+  image(BMPic,0,0,displayWidth + cameraZoomBM,displayHeight + cameraZoomBM); //Image Position
   cameraZoomBM += 1; //Image movement speed.
 }
 
-void YakamaruB()
+void Vind()
 {
-  PImage YakaB; //Image Variable
+  PImage vindPic; //Image Variable
   
-  YakaB = loadImage("KK.jpg"); //Loading the image
-  YakaB.resize(displayWidth, displayHeight); //Image Size
-  image(YakaB,0,0,displayWidth + cameraZoomYaka,displayHeight + cameraZoomYaka); //Image Position
-  cameraZoomYaka += 1; //Image movement speed.
+  vindPic = loadImage("Vind.jpg"); //Loading the image
+  vindPic.resize(displayWidth, displayHeight); //Image Size
+  image(vindPic,0,0,displayWidth + cameraZoomVind,displayHeight + cameraZoomVind); //Image Position
+  cameraZoomVind += 1; //Image movement speed.
 }
 
 void TelosCharacter()
@@ -407,20 +423,20 @@ void mouseClickAraxxor()
 
 void returnOption()
 {
+  //Green colour
+  stroke(0,255,0);
+  
   //360, because angle is 360.
   for(int i = 0; i < 360; i += 20)
   {
-    float xPos = width/1.1+sin(radians(i)) * 40; //Size of X
-    float yPos = height/1.2+cos(radians(i)) * 40; //Size of Y
+    float xPos = width / 1.1 + sin(radians(i) ) * 40; //Size of X
+    float yPos = height / 1.2 + cos(radians(i) ) * 40; //Size of Y
     float Movement = map(dist(mouseX, mouseY, xPos, yPos), -100, 100, -bendAmount / 20, bendAmount /20);
     
-    //Glow effect, still in work...
     pushMatrix();
     translate(xPos, yPos); //Fixed position
     //rotate(radians(90) - atan2(mouseX-xPos, mouseY-yPos)); //May leave out...
-    
-    //Drawing the circle.
-    ellipse(-bendAmount, 0, Movement, Movement);
+    ellipse(-bendAmount, 0, Movement, Movement);//Drawing the circle.
     popMatrix();
   }
   
