@@ -9,6 +9,12 @@
 *                                        *
 ******************************************/
 
+import de.ilu.movingletters.*; //Lib for the text format.
+import processing.sound.*; //Lib for the sound format.
+
+/* Text Objects */
+MovingLetters[] Word = new MovingLetters[3];
+
 /* Menu Objects */
 MenuSelect selectStart;    //Object for Start Menu
 MenuSelect selectEnd;      //Object for End Menu
@@ -16,7 +22,6 @@ MenuSelect selectTelos;    //Object for Telos Menu
 MenuSelect selectAraxxor;  //Object for Araxxor Menu
 LoadingScreen loadingWait; //Object for Loading Bar
 
-import processing.sound.*;
 SoundFile clickSound; //Clicking Sound.
 SoundFile backgroundMusic; //Intro Music.
 
@@ -72,6 +77,11 @@ void setup()
   //size(displayWidth, displayHeight); //Edit out for now..
   fullScreen(); //Goes fullscreen.
   smooth();
+  
+  for(TextForm Amount : TextForm.values())
+  {
+    Word[Amount.Pos] = new MovingLetters(this, Amount.Size, 0, 0);
+  } 
   
   /* Creating new Objects */
   selectStart = new MenuSelect(width/3.0, height/2.0, 100, 50);
@@ -157,6 +167,11 @@ void draw()
     break;
   }
   
+}
+
+void textDisplay(String text, TextForm size, int x, int y)
+{
+  Word[size.Pos].text(text, x, y);  
 }
 
 void startTelos()
@@ -266,12 +281,11 @@ void telosDataPrint()
 
 void loadingScreen()
 {
-    background(0,0,0,255); //Background colour.
-    fill(255);
-    textSize(60); //Text size for loading.
-    text("Loading...", displayWidth / 2.55,displayHeight / 1.7); //Loading message.
-    textSize(50); //Text size for my name.
-    text("Gabriel Grimberg ", displayWidth / 2.9, displayHeight / 3.5); //My name message.
+    background(0); //Background colour.
+    stroke(255); 
+    textDisplay("Gabriel Grimberg", TextForm.Biggest, displayHeight / 2, 100);
+    textDisplay("Loading", TextForm.Biggest, 525, 400);
+    textDisplay("Please wait...", TextForm.Normal, 570, 515);
     fill(0,255,0); //Colour of bar
     stroke(0);
     
@@ -280,26 +294,17 @@ void loadingScreen()
 
 void startMenu()
 {
-  background(0,0,0,255); //Background colour.
-  fill(255);
-  
-  textSize(50); //Text size for my name.
-  text("Gabriel Grimberg", 
-        displayWidth / 2.9,
-        displayHeight / 3.5); //My name message.
+  background(0); //Background colour.
+  stroke(255);
+  textDisplay("Gabriel Grimberg", TextForm.Biggest, displayHeight / 2, 100);
   
   selectStart.selectDisplay1(); //Start Object
-  text("Start", 
-        displayWidth / 3.5,
-        displayHeight / 1.91); //Start the game message. 
-        
   selectEnd.selectDisplay2(); //End Object
-  text("End", 
-        displayWidth / 1.59,
-        displayHeight / 1.91); //Ending the game message.
-  
+
   returnOption();
-        
+  stroke(0); //Black colour for the letters.
+  textDisplay("Start", TextForm.Biggest, 340, 370);
+  textDisplay("End", TextForm.Biggest, 805, 370);
 }
 
 void mousePressed() 
@@ -320,23 +325,17 @@ void mouseReleased()
 
 void characterSelect()
 {
-  background(0,0,0,255); //Background colour.
-  fill(255);
-  
-  textSize(50); //Text size for my name.
-  text("Select your character:", 
-        displayWidth / 2.9,
-        displayHeight / 3.5); //My name message.       
+  background(0); //Background colour.
+  stroke(255);
+  textDisplay("Select your character", TextForm.Biggest, 260, 100);
 
   selectTelos.selectDisplay3(); //Telos Object
-  text("Telos", 
-        displayWidth / 3.5,
-        displayHeight / 1.91); //My name message.
-        
   selectAraxxor.selectDisplay4(); //Araxxor Object
-  text("Araxxor", 
-        displayWidth / 1.69,
-        displayHeight / 1.91); //My name message.      
+  
+  stroke(0); //Black colour for the letters.
+  textDisplay("Telos", TextForm.Big, 360, 380);
+  textDisplay("Araxxor", TextForm.Big, 770, 380);
+     
 }
 
 void mouseClickStart()
