@@ -9,4 +9,3 @@ My first idea was to make something on a game that I play or used to play, I hav
 
 ##### Update: 1st of November 2016
 I have devloped the User Interface and changed it as I kept getting new ideas, I have added a loading screen and background images which I hope to make them zoom in smoothly, the starting menu and the character select menu are complete the main focus now is to work on the characters and add the some cool features to them.
-

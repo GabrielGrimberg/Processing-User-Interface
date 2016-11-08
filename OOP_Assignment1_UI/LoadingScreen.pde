@@ -7,7 +7,7 @@ class LoadingScreen
     this.sizeofBar = sizeofBar;
   }
   
-  void loadingNow()
+  void loadingAnimation()
   {
     for(movingSpeed = movingSpeed + 10; movingSpeed > 1000; movingSpeed = 10);
     {

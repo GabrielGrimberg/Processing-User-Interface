@@ -11,9 +11,10 @@
 
 import de.ilu.movingletters.*; //Lib for the text format.
 import processing.sound.*; //Lib for the sound format.
+import java.awt.Point;
 
 /* Text Objects */
-MovingLetters[] Word = new MovingLetters[3];
+MovingLetters[] Word = new MovingLetters[3]; //<- How many enums.
 
 /* Menu Objects */
 MenuSelect selectStart;    //Object for Start Menu
@@ -24,6 +25,8 @@ LoadingScreen loadingWait; //Object for Loading Bar
 
 SoundFile clickSound; //Clicking Sound.
 SoundFile backgroundMusic; //Intro Music.
+SoundFile telosCharMusic;
+SoundFile araxxorCharMusic;
 
 /* Global Variables */
 /* Variables for reading for stats */
@@ -35,6 +38,7 @@ int noMusicLoop = 0; //Making sure the music doesn't loop.
 int charNoMusic = 0; //Making sure you can't hear the click again for second menu.
 int telosAdv = 0; //Character state for Telos
 int raxAdv = 0; //Character state for Araxxor
+int noMusicRepeat = 0; //Stops the Musics in the Character Select from looping.
 
 /*Variables for Loading Screen */
 int movingSpeed = 0; //Speed the loading bar moves.
@@ -234,6 +238,13 @@ void TelosCharacter()
   telosImage.resize(telosXPos, telosYPos); //Image Size
   imageMode(CENTER);
   image(telosImage, displayWidth / 2, displayHeight / 2, 320, 700);
+  
+  if(noMusicRepeat == 0)
+  {
+    telosCharMusic = new  SoundFile(this, "TelosChar.mp3");
+    telosCharMusic.play();
+    noMusicRepeat = 1;
+  }
 }
 
 void AraxxorCharacter()
@@ -247,6 +258,13 @@ void AraxxorCharacter()
   imageMode(CENTER);
   image(araxxorImage, displayWidth / 2, displayHeight / 2,
                       displayWidth / 2, displayHeight / 2);
+  
+  if(noMusicRepeat == 0)
+  {
+    araxxorCharMusic = new  SoundFile(this, "AraxxorChar.mp3");
+    araxxorCharMusic.play();
+    noMusicRepeat = 1;
+  }
 }
 
 /* Method to load data from the telos file */
@@ -285,11 +303,12 @@ void loadingScreen()
     stroke(255); 
     textDisplay("Gabriel Grimberg", TextForm.Biggest, displayHeight / 2, 100);
     textDisplay("Loading", TextForm.Biggest, 525, 400);
-    textDisplay("Please wait...", TextForm.Normal, 570, 515);
     fill(0,255,0); //Colour of bar
     stroke(0);
     
-    loadingWait.loadingNow();
+    loadingWait.loadingAnimation();
+    
+    textDisplay("Please wait...", TextForm.Normal, 570, 515);
 }
 
 void startMenu()
