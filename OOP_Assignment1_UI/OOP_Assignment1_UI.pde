@@ -30,7 +30,8 @@ SoundFile araxxorCharMusic;
 
 /* Global Variables */
 /* Variables for reading for stats */
-ArrayList<Telos> telosArray = new ArrayList<Telos>(); //Expense Class
+ArrayList<Telos> telosArray = new ArrayList<Telos>();
+ArrayList<Rax> raxArray = new ArrayList<Rax>();
 
 /* Variables for Game State */
 int menuAdvance = 0; //Advance variable from menu options.
@@ -81,7 +82,15 @@ void setup()
   size(displayWidth, displayHeight); //Edit out for now..
   //fullScreen(); //Goes fullscreen.
   smooth();
+  
+  /* Reading the text files */
+  telosLoadData();
+  raxLoadData();
+  
+  /* Printing the Results */
   telosPrintData();
+  raxPrintData();
+  
   for(TextForm Amount : TextForm.values())
   {
     Word[Amount.Pos] = new MovingLetters(this, Amount.Size, 0, 0);
@@ -284,6 +293,30 @@ void telosLoadData()
 void telosPrintData()
 {
   for(Telos ShowMeData: telosArray)
+  {
+    println(ShowMeData);
+  }
+}
+
+/* Method to load data from the araxxor file */
+void raxLoadData()
+{
+  raxArray.clear();
+  
+  //Loading from a file.
+  Table DataLoading = loadTable("raxstats.csv", "header");
+  for(int i = 0 ; i < DataLoading.getRowCount(); i ++)
+  {
+    TableRow Row = DataLoading.getRow(i);
+    Rax DataObject = new Rax(Row);
+    raxArray.add(DataObject);
+  }
+}
+
+/* Method that Displays the text file */
+void raxPrintData()
+{
+  for(Rax ShowMeData: raxArray)
   {
     println(ShowMeData);
   }

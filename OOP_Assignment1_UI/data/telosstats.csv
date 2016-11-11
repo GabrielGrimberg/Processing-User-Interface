@@ -1,4 +1,4 @@
-Year,Highest Enrage,Average Enrage,Package,Maximum Hit, Minium Hit
+Year,Highest Enrage,Average Enrage,Package,Maximum Hit, Minimum Hit
 2005,100,0,Bronze,5000,700
 2006,200,10,Bronze,5500,800
 2007,300,50,Bronze,5600,900
@@ -11,4 +11,3 @@ Year,Highest Enrage,Average Enrage,Package,Maximum Hit, Minium Hit
 2014,1500,210,Platinum,8200,2200
 2015,1700,240,Platinum,8500,2600
 2016,2000,280,Rhodium,9800,3000
-
