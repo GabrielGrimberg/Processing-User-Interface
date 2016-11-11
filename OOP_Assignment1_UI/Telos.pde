@@ -1,26 +1,41 @@
 class Telos
 {
-  int enrage;       //How mad the boss is
-  int minimumHit;   //Lowest he can hit
-  int maximumHit;   //Hardest he can hit
-  String lootTable; //Basiclly the loot you get when killing him
+  int Year;          //Year of boss.
+  int HighestEnrage; //Highest Enrage done by a player.
+  int AvgEnrage;     //Average Enrage by from everyone.
+  String Package;    //Basiclly the loot you get when killing him.
+  int MaxHit;        //Telos hardest hit.
+  int MinHit;        //Telos minimum hit.
   
-  //Default contructor
-  Telos()
+  Telos(String Seperate)
   {
-    enrage = 0;            //Intizilazing to 0
-    minimumHit = 0;        //Intizilazing to 0
-    maximumHit = 0;        //Intizilazing to 0
-    lootTable = "Bronze"; //Intizilazing to Bronze as it's the start.
+    String[] Fields = Seperate.split(",");
+    Year = Integer.parseInt(Fields[0]);
+    HighestEnrage = Integer.parseInt(Fields[1]);
+    AvgEnrage = Integer.parseInt(Fields[2]);
+    Package = Fields[3];
+    MaxHit = Integer.parseInt(Fields[4]);
+    MinHit = Integer.parseInt(Fields[5]);  
   }
   
-  //Paramaterised Constructor
-  Telos( int enrage, int minimumHit, int maximumHit, String lootTable)
+  Telos(TableRow Row)
   {
-    this.enrage = enrage;
-    this.minimumHit = minimumHit;
-    this.maximumHit = maximumHit;
-    this.lootTable = lootTable;
+    Year = Row.getInt(0);
+    HighestEnrage = Row.getInt(1);
+    AvgEnrage = Row.getInt(2);
+    Package = Row.getString(3);
+    MaxHit = Row.getInt(4);
+    MinHit = Row.getInt(5);
+  }
+  
+  String toString()
+  {
+    return Year + "\t" 
+    + HighestEnrage + "\t" 
+    + AvgEnrage + "\t" 
+    + Package + "\t" 
+    + MaxHit + "\t" 
+    + MinHit;
   }
   
 }

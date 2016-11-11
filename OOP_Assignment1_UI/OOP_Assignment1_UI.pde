@@ -78,10 +78,10 @@ float bendAmount = 20; //Used for the increase when mouse pointing away.
 
 void setup()
 {
-  //size(displayWidth, displayHeight); //Edit out for now..
-  fullScreen(); //Goes fullscreen.
+  size(displayWidth, displayHeight); //Edit out for now..
+  //fullScreen(); //Goes fullscreen.
   smooth();
-  
+  telosPrintData();
   for(TextForm Amount : TextForm.values())
   {
     Word[Amount.Pos] = new MovingLetters(this, Amount.Size, 0, 0);
@@ -93,8 +93,6 @@ void setup()
   selectTelos = new MenuSelect(width/3.0, height/2.0, 100, 50);
   selectAraxxor = new MenuSelect(width/1.5, height/2.0, 100, 50);
   loadingWait = new LoadingScreen(200);
-  
-  //telosDataPrint();
 }
 
 void draw()
@@ -268,33 +266,27 @@ void AraxxorCharacter()
 }
 
 /* Method to load data from the telos file */
-void telosDataLoader()
-{  
-  //Reading in the file, in tsv mode.
-  Table telosText = loadTable("telosstats.txt", "tsv");
-  
+void telosLoadData()
+{
   telosArray.clear();
   
-  for(int row = 0; row < telosText.getRowCount(); row++)
+  //Loading from a file.
+  Table DataLoading = loadTable("telosstats.csv", "header");
+  for(int i = 0 ; i < DataLoading.getRowCount(); i ++)
   {
-    Telos telosStatsHolder = new Telos(telosText.getInt(row, 0), 
-                                       telosText.getInt(row, 1), 
-                                       telosText.getInt(row, 2), 
-                                       telosText.getString(row, 3) 
-                                      );
-    
-    telosArray.add(telosStatsHolder);
-    
-  } 
+    TableRow Row = DataLoading.getRow(i);
+    Telos DataObject = new Telos(Row);
+    telosArray.add(DataObject);
+  }
 }
 
 /* Method that Displays the text file */
-void telosDataPrint()
+void telosPrintData()
 {
-  for(Telos telosStatsHolder: telosArray)
+  for(Telos ShowMeData: telosArray)
   {
-    println(telosStatsHolder);
-  }  
+    println(ShowMeData);
+  }
 }
 
 void loadingScreen()
