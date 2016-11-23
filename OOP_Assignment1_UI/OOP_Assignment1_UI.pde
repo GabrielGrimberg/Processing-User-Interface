@@ -22,6 +22,7 @@ MenuSelect selectEnd;      //Object for End Menu
 MenuSelect selectTelos;    //Object for Telos Menu
 MenuSelect selectAraxxor;  //Object for Araxxor Menu
 LoadingScreen loadingWait; //Object for Loading Bar
+MenuSelect skippingToChar;  //Object for Araxxor Menu
 
 /* Roatating Object */
 ObjectRotate skipIntro;
@@ -65,6 +66,10 @@ boolean mousePressedOnbox3 = false; //Variable to highlight if box is pressed.
 boolean mouseOnbox4 = false; //Variable to check if the mouse is on the box.
 boolean mousePressedOnbox4 = false; //Variable to highlight if box is pressed.
 
+/* Boolean Variables for the Skipping Menu */
+boolean mouseOnboxSkip = false; //Variable to check if the mouse is on the box.
+boolean mousePressedOnSkip = false; //Variable to highlight if box is pressed.
+
 /* Time Movement Variables */
 float timeDelta = 0;
 float rollingTheTime = 0;
@@ -106,8 +111,9 @@ void setup()
   selectEnd = new MenuSelect(width/1.5, height/2.0, 100, 50);
   selectTelos = new MenuSelect(width/3.0, height/2.0, 100, 50);
   selectAraxxor = new MenuSelect(width/1.5, height/2.0, 100, 50);
+  skippingToChar = new MenuSelect(width/2.0, height/1.3, 100, 50);
   loadingWait = new LoadingScreen(200);
-  skipIntro = new ObjectRotate(1.1,1.3);
+  skipIntro = new ObjectRotate(1.92,2.0);
 }
 
 void draw()
@@ -158,17 +164,16 @@ void draw()
     if(rollingTheTime > 30 && noRepeatBG == 4 || noRepeatBG == 5) //25 seconds
     {
       noRepeatBG = 5;
+      backgroundMusic.stop(); //Stops the background music.
       menuAdvance = 2; //Moving into character select.
     }
     break;
       
     case 2:
-    if(rollingTheTime > 30) //25 seconds
     {
       clear(); //Clears the introduction images.
-      backgroundMusic.stop(); //Stops the background music.
       characterSelect();
-    } 
+    }
     
     if(telosAdv == 1)
     {
@@ -348,14 +353,16 @@ void startMenu()
   stroke(255);
   textDisplay("Gabriel Grimberg", TextForm.Biggest, displayHeight / 2, 100);
   
-  selectStart.selectDisplay1(); //Start Object
-  selectEnd.selectDisplay2(); //End Object
+  selectStart.selectDisplay1(); //Start Object.
+  selectEnd.selectDisplay2(); //End Object.
+  skippingToChar.SkipMenuFxn(); //Skip Object.
   
   skipIntro.returnOption(); //Green roatating object.
   
   stroke(0); //Black colour for the letters.
   textDisplay("Start", TextForm.Biggest, 340, 370);
   textDisplay("End", TextForm.Biggest, 805, 370);
+  textDisplay("Skip", TextForm.Biggest, 585, 590);
 }
 
 void mousePressed() 
@@ -364,6 +371,7 @@ void mousePressed()
   mouseClickEnd();    //For the End Option (Menu 1)
   mouseClickTelos();  //For the Telos Option (Menu 2)
   mouseClickAraxxor();//For the Araxxor Option (Menu 2)
+  mouseClickSkipping(); //To skip to character menu.
 }
 
 void mouseReleased() 
@@ -372,6 +380,7 @@ void mouseReleased()
   mousePressedOnbox2 = false; //If mouse released set it back to false.
   mousePressedOnbox3 = false; //If mouse released set it back to false.
   mousePressedOnbox4 = false; //If mouse released set it back to false.
+  mousePressedOnSkip = false; //If mouse released set it back to false.
 }
 
 void characterSelect()
@@ -468,5 +477,28 @@ void mouseClickAraxxor()
   else 
   {
     mousePressedOnbox4 = false; //If not, set to false.
+  }
+}
+
+void mouseClickSkipping()
+{
+  //If statement to make sure you can't click from anywhere.
+  if(menuAdvance != 2)
+  {
+    if(mouseOnboxSkip == true) //If true
+    {     
+      mousePressedOnSkip = true; //Set variable to true
+      fill(255, 255, 255); //To highlight the box.
+      clickSound = new SoundFile(this, "Click.mp3");
+      clickSound.play();
+      
+      //Skipping straight to the character select.
+      menuAdvance = 2;
+    
+    } 
+    else 
+    {
+      mousePressedOnSkip = false; //If not, set to false.
+    }
   }
 }

@@ -17,7 +17,7 @@ class ObjectRotate
     stroke(0,255,0);
     
     //360, because angle is 360.
-    for(int i = 0; i < 360; i += 20)
+    for(int i = 0; i < 360; i += 10)
     {
       float xPos = width / xPOS + sin(radians(i) ) * 40; //Size of X
       float yPos = height / yPOS + cos(radians(i) ) * 40; //Size of Y
@@ -25,7 +25,6 @@ class ObjectRotate
       
       pushMatrix();
       translate(xPos, yPos); //Fixed position
-      rotate(radians(90) - atan2(mouseX-xPos, mouseY-yPos)); //May leave out...
       ellipse(-bendAmount, 0, Movement, Movement);//Drawing the circle.
       popMatrix();
     }
