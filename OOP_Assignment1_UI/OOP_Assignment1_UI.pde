@@ -133,8 +133,13 @@ void draw()
   switch(menuAdvance)
   {
     case 0:
-      startMenu();
+    if(mousePressedOnSkip == true)
+    {
+      menuAdvance = 2;
+    }
+    startMenu();
       break;
+    
     case 1:
     if(rollingTheTime > 5 && noRepeatBG == 0) //5 seconds
     {
@@ -176,10 +181,9 @@ void draw()
     break;
       
     case 2:
-    {
-      clear(); //Clears the introduction images.
-      characterSelect();
-    }
+    
+    clear(); //Clears the introduction images.
+    characterSelect();
     
     if(telosAdv == 1)
     {
@@ -358,10 +362,12 @@ void startMenu()
   background(0); //Background colour.
   stroke(255);
   textDisplay("Gabriel Grimberg", TextForm.Biggest, displayHeight / 2, 100);
-  
+ 
   selectStart.selectDisplay1(); //Start Object.
   selectEnd.selectDisplay2(); //End Object.
+
   skippingToChar.SkipMenuFxn(); //Skip Object.
+  
   
   skipIntro.returnOption(); //Green roatating object.
   
@@ -492,10 +498,11 @@ void mouseClickAraxxor()
   }
 }
 
+/* Method to skip the intro screen */
 void mouseClickSkipping()
 {
   //If statement to make sure you can't click from anywhere.
-  if(menuAdvance != 2)
+  if(menuAdvance == 0)
   {
     if(mouseOnboxSkip == true) //If true
     {     
@@ -503,10 +510,6 @@ void mouseClickSkipping()
       fill(255, 255, 255); //To highlight the box.
       clickSound = new SoundFile(this, "Click.mp3");
       clickSound.play();
-      
-      //Skipping straight to the character select.
-      menuAdvance = 2;
-    
     } 
     else 
     {
@@ -515,6 +518,7 @@ void mouseClickSkipping()
   }
 }
 
+/* Method to go back to the main screen */
 void MainMenuReturn()
 {
   //If statement to make sure you can't click from anywhere.
@@ -526,10 +530,9 @@ void MainMenuReturn()
       fill(255, 255, 255); //To highlight the box.
       clickSound = new SoundFile(this, "Click.mp3");
       clickSound.play();
-      
+        
       //Going back to main menu.
       menuAdvance = 0;
-    
     } 
     else 
     {
