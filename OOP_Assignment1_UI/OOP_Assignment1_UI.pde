@@ -107,13 +107,13 @@ void setup()
   } 
   
   /* Creating new Objects */
-  selectStart = new MenuSelect(width/3.0, height/2.0, 100, 50);
-  selectEnd = new MenuSelect(width/1.5, height/2.0, 100, 50);
+  selectStart = new MenuSelect(width/3.0, height/2.3, 100, 50);
+  selectEnd = new MenuSelect(width/1.5, height/2.3, 100, 50);
   selectTelos = new MenuSelect(width/3.0, height/2.0, 100, 50);
   selectAraxxor = new MenuSelect(width/1.5, height/2.0, 100, 50);
-  skippingToChar = new MenuSelect(width/2.0, height/1.3, 100, 50);
+  skippingToChar = new MenuSelect(width/2.0, height/1.425, 100, 50);
   loadingWait = new LoadingScreen(200);
-  skipIntro = new ObjectRotate(1.92,2.0);
+  skipIntro = new ObjectRotate(1.93,2.3);
 }
 
 void draw()
@@ -360,9 +360,9 @@ void startMenu()
   skipIntro.returnOption(); //Green roatating object.
   
   stroke(0); //Black colour for the letters.
-  textDisplay("Start", TextForm.Biggest, 340, 370);
-  textDisplay("End", TextForm.Biggest, 805, 370);
-  textDisplay("Skip", TextForm.Biggest, 585, 590);
+  textDisplay("Start", TextForm.Biggest, 340, 320);
+  textDisplay("End", TextForm.Biggest, 805, 320);
+  textDisplay("Skip", TextForm.Biggest, 585, 540);
 }
 
 void mousePressed() 

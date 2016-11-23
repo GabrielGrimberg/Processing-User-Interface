@@ -28,8 +28,7 @@ class MenuSelect
     
     if(mousePressedOnbox1 == false) 
     { 
-      stroke(255);
-      fill(204, 102, 0);
+      fill(0,255,0);
     } 
   } 
   else 
@@ -59,8 +58,7 @@ class MenuSelect
     
     if(mousePressedOnbox2 == false) 
     { 
-      stroke(255);
-      fill(204, 102, 0);
+      fill(0,255,0);
     } 
   } 
   else 
@@ -90,8 +88,7 @@ class MenuSelect
     
     if(mousePressedOnbox3 == false) 
     { 
-      stroke(255);
-      fill(204, 102, 0);
+      fill(0,255,0);
     } 
   } 
   else 
@@ -121,8 +118,7 @@ class MenuSelect
     
     if(mousePressedOnbox4 == false) 
     { 
-      stroke(255);
-      fill(204, 102, 0);
+      fill(0,255,0);
     } 
   } 
   else 
@@ -152,8 +148,7 @@ class MenuSelect
     
     if(mousePressedOnSkip == false) 
     { 
-      stroke(255);
-      fill(204, 102, 0);
+      fill(0,255,0);
     } 
   } 
   else 
