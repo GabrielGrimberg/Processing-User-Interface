@@ -23,12 +23,17 @@ MenuSelect selectTelos;    //Object for Telos Menu
 MenuSelect selectAraxxor;  //Object for Araxxor Menu
 LoadingScreen loadingWait; //Object for Loading Bar
 
+/* Roatating Object */
+ObjectRotate skipIntro;
+
+/* Sound Files */
 SoundFile clickSound; //Clicking Sound.
 SoundFile backgroundMusic; //Intro Music.
-SoundFile telosCharMusic;
-SoundFile araxxorCharMusic;
+SoundFile telosCharMusic; //Telos Music.
+SoundFile araxxorCharMusic; //Rax Music.
 
 /* Global Variables */
+
 /* Variables for reading for stats */
 ArrayList<Telos> telosArray = new ArrayList<Telos>();
 ArrayList<Rax> raxArray = new ArrayList<Rax>();
@@ -102,6 +107,7 @@ void setup()
   selectTelos = new MenuSelect(width/3.0, height/2.0, 100, 50);
   selectAraxxor = new MenuSelect(width/1.5, height/2.0, 100, 50);
   loadingWait = new LoadingScreen(200);
+  skipIntro = new ObjectRotate(1.1,1.3);
 }
 
 void draw()
@@ -344,8 +350,9 @@ void startMenu()
   
   selectStart.selectDisplay1(); //Start Object
   selectEnd.selectDisplay2(); //End Object
-
-  returnOption();
+  
+  skipIntro.returnOption(); //Green roatating object.
+  
   stroke(0); //Black colour for the letters.
   textDisplay("Start", TextForm.Biggest, 340, 370);
   textDisplay("End", TextForm.Biggest, 805, 370);
@@ -462,25 +469,4 @@ void mouseClickAraxxor()
   {
     mousePressedOnbox4 = false; //If not, set to false.
   }
-}
-
-void returnOption()
-{
-  //Green colour
-  stroke(0,255,0);
-  
-  //360, because angle is 360.
-  for(int i = 0; i < 360; i += 20)
-  {
-    float xPos = width / 1.1 + sin(radians(i) ) * 40; //Size of X
-    float yPos = height / 1.2 + cos(radians(i) ) * 40; //Size of Y
-    float Movement = map(dist(mouseX, mouseY, xPos, yPos), -100, 100, -bendAmount / 20, bendAmount /20);
-    
-    pushMatrix();
-    translate(xPos, yPos); //Fixed position
-    //rotate(radians(90) - atan2(mouseX-xPos, mouseY-yPos)); //May leave out...
-    ellipse(-bendAmount, 0, Movement, Movement);//Drawing the circle.
-    popMatrix();
-  }
-  
 }
