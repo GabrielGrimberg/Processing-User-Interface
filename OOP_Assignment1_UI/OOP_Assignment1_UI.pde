@@ -94,8 +94,8 @@ float bendAmount = 20; //Used for the increase when mouse pointing away.
 
 void setup()
 {
-  size(displayWidth, displayHeight); //Edit out for now..
-  //fullScreen(); //Goes fullscreen.
+  //size(displayWidth, displayHeight); //Edit out for now..
+  fullScreen(); //Goes fullscreen.
   smooth();
   
   /* Reading the text files */
@@ -130,17 +130,33 @@ void draw()
   
   rollingTheTime += timeDelta;
   
+  //The main game state.
   switch(menuAdvance)
   {
     case 0:
+    
+    if(mousePressedOnbox1 == true)
+    {
+      menuAdvance = 1;
+      noMusicLoop = 1; //Making sure the music doesn't break.
+      rollingTheTime = 0; //Setting the timer back to 0.
+    }
     if(mousePressedOnSkip == true)
     {
       menuAdvance = 2;
     }
+    
+    if(mousePressedOnMenu == true)
+    {
+      rollingTheTime = 0; //Setting the timer back to 0.
+      noMusicLoop = 0;
+      menuAdvance = 0;
+    }
     startMenu();
-      break;
+    break;
     
     case 1:
+    
     if(rollingTheTime > 5 && noRepeatBG == 0) //5 seconds
     {
       startTelos();
@@ -184,6 +200,22 @@ void draw()
     
     clear(); //Clears the introduction images.
     characterSelect();
+    
+    if(mousePressedOnbox3 == true)
+    {
+      telosAdv = 1;
+      menuAdvance = 3 ;
+    }
+    
+    if(mousePressedOnbox4 == true)
+    {
+      raxAdv = 1;
+      menuAdvance = 3 ;
+    }
+    
+    break;
+    
+    case 3:
     
     if(telosAdv == 1)
     {
@@ -267,6 +299,11 @@ void TelosCharacter()
   imageMode(CENTER);
   image(telosImage, displayWidth / 2, displayHeight / 2, 320, 700);
   
+  stroke(random(0,255),random(0,255),255);
+  textDisplay("Telos", TextForm.Biggest, 50, 50);
+  stroke(255,255,255);
+  textDisplay("Click On Buttons", TextForm.Big, 60, 700);
+  
   if(noMusicRepeat == 0)
   {
     telosCharMusic = new  SoundFile(this, "TelosChar.mp3");
@@ -287,6 +324,12 @@ void AraxxorCharacter()
   image(araxxorImage, displayWidth / 2, displayHeight / 2,
                       displayWidth / 2, displayHeight / 2);
   
+  stroke(random(0,255),random(0,255),255);
+  textDisplay("Araxxor", TextForm.Big, 570, 50);
+  stroke(255,255,255);
+  textDisplay("Click On Buttons", TextForm.Big, 60, 700);
+  
+  //Variable so the music doesn't loop.
   if(noMusicRepeat == 0)
   {
     araxxorCharMusic = new  SoundFile(this, "AraxxorChar.mp3");
@@ -409,6 +452,8 @@ void characterSelect()
   
   menuReturn.BackToMenuFxn(); //Return object
   
+  skipIntro.returnOption(); //Green roatating object.
+  
   stroke(0); //Black colour for the letters.
   textDisplay("Telos", TextForm.Big, 360, 330);
   textDisplay("Araxxor", TextForm.Big, 770, 330);
@@ -429,9 +474,6 @@ void mouseClickStart()
     
       backgroundMusic = new  SoundFile(this, "BMusic.mp3");
       backgroundMusic.play();
-      menuAdvance = 1; //Setting to 1 so it doesn't overlap.
-      noMusicLoop = 1; //Making sure the music doesn't break.
-      rollingTheTime = 0;
     }
   } 
   else 
@@ -468,7 +510,6 @@ void mouseClickTelos()
       clickSound = new SoundFile(this, "Click.mp3");
       clickSound.play();
       charNoMusic = 1;
-      telosAdv = 1;
     }
   } 
   else 
@@ -489,7 +530,6 @@ void mouseClickAraxxor()
       clickSound = new SoundFile(this, "Click.mp3");
       clickSound.play();
       charNoMusic = 1;
-      raxAdv = 1;
     }
   } 
   else 
