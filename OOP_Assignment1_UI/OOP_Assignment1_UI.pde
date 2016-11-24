@@ -11,7 +11,6 @@
 
 import de.ilu.movingletters.*; //Lib for the text format.
 import processing.sound.*; //Lib for the sound format.
-import java.awt.Point;
 
 /* Text Objects */
 MovingLetters[] Word = new MovingLetters[3]; //<- How many enums.
@@ -130,10 +129,9 @@ void draw()
   
   rollingTheTime += timeDelta;
   
-  //The main game state.
-  switch(menuAdvance)
+  if(menuAdvance == 0)
   {
-    case 0:
+    startMenu();
     
     if(mousePressedOnbox1 == true)
     {
@@ -145,39 +143,37 @@ void draw()
     {
       menuAdvance = 2;
     }
-    
     if(mousePressedOnMenu == true)
     {
       rollingTheTime = 0; //Setting the timer back to 0.
       noMusicLoop = 0;
       menuAdvance = 0;
     }
-    startMenu();
-    break;
-    
-    case 1:
-    
+  }
+  
+  if(menuAdvance == 1)
+  {
     if(rollingTheTime > 5 && noRepeatBG == 0) //5 seconds
     {
       startTelos();
-    } 
+    }
     else
     {
       loadingScreen();
     }
-    
+      
     if(rollingTheTime > 10 && noRepeatBG == 0 || noRepeatBG == 1) //10 seconds
     {
       noRepeatBG = 1;
       Araxxor();
     }
-    
+      
     if(rollingTheTime > 15 && noRepeatBG == 1 || noRepeatBG == 2) //15 seconds
     {
       noRepeatBG = 2;
       Nomad();
     }
-    
+      
     if(rollingTheTime > 20 && noRepeatBG == 2 || noRepeatBG == 3) //20 seconds
     {
       noRepeatBG = 3;
@@ -194,10 +190,10 @@ void draw()
       backgroundMusic.stop(); //Stops the background music.
       menuAdvance = 2; //Moving into character select.
     }
-    break;
-      
-    case 2:
-    
+  }
+  
+  if(menuAdvance == 2)
+  {
     clear(); //Clears the introduction images.
     characterSelect();
     
@@ -206,17 +202,16 @@ void draw()
       telosAdv = 1;
       menuAdvance = 3 ;
     }
-    
+      
     if(mousePressedOnbox4 == true)
     {
       raxAdv = 1;
       menuAdvance = 3 ;
     }
-    
-    break;
-    
-    case 3:
-    
+  }
+  
+  if(menuAdvance == 3)
+  {
     if(telosAdv == 1)
     {
       clear();
@@ -228,7 +223,6 @@ void draw()
       clear();
       AraxxorCharacter();
     }
-    break;
   }
   
 }
@@ -420,6 +414,25 @@ void startMenu()
   textDisplay("Skip", TextForm.Biggest, 585, 540);
 }
 
+void keyPressed()
+{
+  //Going back to Character Select.
+  if(key == ' ' && menuAdvance == 3 && raxAdv == 1)
+  {
+    araxxorCharMusic.stop();
+    raxAdv = 0;
+    menuAdvance = 2;
+    
+  }
+  
+  //Going back to Character Select.
+  if( (key == 'z' || key == 'Z') && menuAdvance == 3 && telosAdv == 1)
+  {
+    telosCharMusic.stop();
+    telosAdv = 0;
+    menuAdvance = 2;
+  }
+}
 void mousePressed() 
 {
   mouseClickStart();  //For the Start Option (Menu 1)
@@ -520,21 +533,24 @@ void mouseClickTelos()
 
 void mouseClickAraxxor()
 {
-  //Character Menu Part (Araxxor)
-  if(mouseOnbox4 == true) //If true
+  if(menuAdvance == 2)
   {
-    if(charNoMusic == 0)
+    //Character Menu Part (Araxxor)
+    if(mouseOnbox4 == true) //If true
     {
-      mousePressedOnbox4 = true; //Set variable to true
-      fill(255, 255, 255); //To highlight the box.
-      clickSound = new SoundFile(this, "Click.mp3");
-      clickSound.play();
-      charNoMusic = 1;
+      if(charNoMusic == 0)
+      {
+        mousePressedOnbox4 = true; //Set variable to true
+        fill(255, 255, 255); //To highlight the box.
+        clickSound = new SoundFile(this, "Click.mp3");
+        clickSound.play();
+        charNoMusic = 1;
+      }
+    } 
+    else 
+    {
+      mousePressedOnbox4 = false; //If not, set to false.
     }
-  } 
-  else 
-  {
-    mousePressedOnbox4 = false; //If not, set to false.
   }
 }
 
