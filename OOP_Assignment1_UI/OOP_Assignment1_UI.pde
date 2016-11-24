@@ -27,6 +27,10 @@ MenuSelect menuReturn; //Object to return back to menu from character select
 /* Roatating Object */
 ObjectRotate skipIntro;
 
+/*Clicking Objects */
+PartSelecting selectOnTelos1;
+PartSelecting selectOnTelos2;
+
 /* Sound Files */
 SoundFile clickSound; //Clicking Sound.
 SoundFile backgroundMusic; //Intro Music.
@@ -96,6 +100,7 @@ void setup()
   //size(displayWidth, displayHeight); //Edit out for now..
   fullScreen(); //Goes fullscreen.
   smooth();
+  frameRate(60);
   
   /* Reading the text files */
   telosLoadData();
@@ -117,8 +122,12 @@ void setup()
   selectAraxxor = new MenuSelect(width/1.5, height/2.3, 100, 50);
   skippingToChar = new MenuSelect(width/2.0, height/1.425, 100, 50);
   menuReturn = new MenuSelect(width/2.0, height/1.425, 100, 50);
+  
   loadingWait = new LoadingScreen(200);
   skipIntro = new ObjectRotate(1.93,2.3);
+  
+  selectOnTelos1 = new PartSelecting(displayWidth / 2.3, displayHeight / 1.5, true);
+  selectOnTelos2 = new PartSelecting(displayWidth / 1.7, displayHeight / 1.5, true);
 }
 
 void draw()
@@ -216,6 +225,8 @@ void draw()
     {
       clear();
       TelosCharacter();
+      selectOnTelos1.display();
+      selectOnTelos2.display();
     }
     
     if(raxAdv == 1)
@@ -398,6 +409,7 @@ void startMenu()
 {
   background(0); //Background colour.
   stroke(255);
+  
   textDisplay("Gabriel Grimberg", TextForm.Biggest, displayHeight / 2, 100);
  
   selectStart.selectDisplay1(); //Start Object.
