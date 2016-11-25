@@ -242,6 +242,7 @@ void draw()
   
 }
 
+/* Currently for debugging */
 void keyPressed()
 {
   if(key == ' ' && menuAdvance == 3 && telosAdv == 1)
@@ -249,13 +250,21 @@ void keyPressed()
     menuAdvance = 2;
     telosAdv = 0;
   }
-  
+  if(key == 'z' && menuAdvance == 2 && telosAdv == 0)
+  {
+    menuAdvance = 3;
+    telosAdv = 1;
+    
+  }  
 }
+
+/* Method to display the text nicely */
 void textDisplay(String text, TextForm size, int x, int y)
 {
   Word[size.Pos].text(text, x, y);  
 }
 
+/* Background Image 1: Telos */
 void startTelos()
 {
   PImage telosPic; //Image Variable
@@ -266,6 +275,7 @@ void startTelos()
   cameraZoomTelos += 1; //Image movement speed.
 }
 
+/* Background Image 2: Araxxor */
 void Araxxor()
 {
   PImage araxxorPic; //Image Variable
@@ -276,6 +286,7 @@ void Araxxor()
   cameraZoomRax += 1; //Image movement speed.
 }
 
+/* Background Image 3: Nomad */
 void Nomad()
 {
   PImage nomadPic; //Image Variable
@@ -286,6 +297,7 @@ void Nomad()
   cameraZoomNomad += 1; //Image movement speed.
 }
 
+/* Background Image 4: Beastemaster Durzag */
 void BM()
 {
   PImage BMPic; //Image Variable
@@ -296,6 +308,7 @@ void BM()
   cameraZoomBM += 1; //Image movement speed.
 }
 
+/* Background Image 5: Vind */
 void Vind()
 {
   PImage vindPic; //Image Variable
@@ -306,6 +319,7 @@ void Vind()
   cameraZoomVind += 1; //Image movement speed.
 }
 
+/* Telos Character Method */
 void TelosCharacter()
 {
   int telosXPos = 320;
@@ -322,6 +336,8 @@ void TelosCharacter()
   stroke(255,255,255);
   textDisplay("Click On Buttons", TextForm.Big, 60, 700);
   
+  TelosReturn.ReturnFromTelos();
+  
   if(noMusicRepeat == 0)
   {
     telosCharMusic = new  SoundFile(this, "TelosChar.mp3");
@@ -330,6 +346,7 @@ void TelosCharacter()
   }
 }
 
+/* Araxxor Character Method */
 void AraxxorCharacter()
 {
   int araxxorXPos = 977;
@@ -371,7 +388,7 @@ void telosLoadData()
   }
 }
 
-/* Method that Displays the text file */
+/* Method that displays the text file */
 void telosPrintData()
 {
   for(Telos ShowMeData: telosArray)
@@ -404,6 +421,7 @@ void raxPrintData()
   }
 }
 
+/* Method to display the Loading Bar */
 void loadingScreen()
 {
     background(0); //Background colour.
@@ -418,6 +436,7 @@ void loadingScreen()
     textDisplay("Please wait...", TextForm.Normal, 570, 515);
 }
 
+/* Method for the first screen when the user opens the UI */
 void startMenu()
 {
   background(0); //Background colour.
@@ -437,6 +456,7 @@ void startMenu()
   textDisplay("Skip", TextForm.Biggest, 585, 540);
 }
 
+/* mousePressed method for when the mouse is pressed */
 void mousePressed() 
 {
   mouseClickStart();  //For the Start Option (Menu 1)
@@ -448,6 +468,7 @@ void mousePressed()
   TelosReturn(); //Returning back to character select from Telos.
 }
 
+/* mouseReleased method for when the mouse is released. */ 
 void mouseReleased() 
 {
   //If mouse released set it back to false.
@@ -460,6 +481,7 @@ void mouseReleased()
   mousePressedOnTelos = false;
 }
 
+/* Selecting the character method */
 void characterSelect()
 {
   background(0); //Background colour.
@@ -480,6 +502,7 @@ void characterSelect()
      
 }
 
+/* Start button */
 void mouseClickStart()
 {
   if(mouseOnbox1 == true) //If true
@@ -501,6 +524,7 @@ void mouseClickStart()
   }
 }
 
+/* End Button */
 void mouseClickEnd()
 {
   if(mouseOnbox2 == true) //If true
@@ -517,6 +541,7 @@ void mouseClickEnd()
   }
 }
 
+/* Character Select: Telos Button */
 void mouseClickTelos()
 {
  //Character Menu Part (Telos)
@@ -537,6 +562,7 @@ void mouseClickTelos()
   } 
 }
 
+/* Character Select: Araxxor Button */
 void mouseClickAraxxor()
 {
   if(menuAdvance == 2)
