@@ -194,4 +194,34 @@ class MenuSelect
   fill(0);
   }
   
+  void ReturnFromTelos()
+  {
+    rectMode(RADIUS);
+    
+    if(mouseX > boxXPoint - sizeOfbox &&  //If statement to check
+       mouseX < boxXPoint + sizeOfbox &&  //If the mouse is anywhere
+       mouseY > boxYPoint - sizeOfbox &&  //near the box.
+       mouseY < boxYPoint + sizeOfbox)    
+       
+    {
+      mouseOnboxTelos = true; //Set true, continue to mousePressed()
+    
+    if(mousePressedOnTelos == false) 
+    { 
+      fill(0,255,0);
+    } 
+  } 
+  else 
+  {
+    stroke(153);
+    fill(153);
+    
+    mouseOnboxTelos = false;
+  }
+  
+  //Drawing the box.
+  rect(boxXPoint, boxYPoint, sizeOfbox, sizeOfbox, boxCurve);
+  fill(0);
+  }
+  
 }

@@ -23,6 +23,7 @@ MenuSelect selectAraxxor;  //Object for Araxxor Menu
 LoadingScreen loadingWait; //Object for Loading Bar
 MenuSelect skippingToChar;  //Object for Araxxor Menu
 MenuSelect menuReturn; //Object to return back to menu from character select
+MenuSelect TelosReturn; //Object to return back to menu from character select
 
 /* Roatating Object */
 ObjectRotate skipIntro;
@@ -78,6 +79,10 @@ boolean mousePressedOnSkip = false; //Variable to highlight if box is pressed.
 boolean mouseOnboxMenu = false; //Variable to check if the mouse is on the box.
 boolean mousePressedOnMenu = false; //Variable to highlight if box is pressed.
 
+/* Boolean Variables for returning to Character Select from Telos. */
+boolean mouseOnboxTelos = false; //Variable to check if the mouse is on the box.
+boolean mousePressedOnTelos = false; //Variable to highlight if box is pressed.
+
 /* Time Movement Variables */
 float timeDelta = 0;
 float rollingTheTime = 0;
@@ -122,6 +127,7 @@ void setup()
   selectAraxxor = new MenuSelect(width/1.5, height/2.3, 100, 50);
   skippingToChar = new MenuSelect(width/2.0, height/1.425, 100, 50);
   menuReturn = new MenuSelect(width/2.0, height/1.425, 100, 50);
+  TelosReturn = new MenuSelect(width/ 1.1, height/1.2, 80, 50);
   
   loadingWait = new LoadingScreen(200);
   skipIntro = new ObjectRotate(1.93,2.3);
@@ -203,7 +209,7 @@ void draw()
   
   if(menuAdvance == 2)
   {
-    clear(); //Clears the introduction images.
+    //clear(); //Clears the introduction images.
     characterSelect();
     
     if(mousePressedOnbox3 == true)
@@ -225,8 +231,6 @@ void draw()
     {
       clear();
       TelosCharacter();
-      selectOnTelos1.display();
-      selectOnTelos2.display();
     }
     
     if(raxAdv == 1)
@@ -238,6 +242,15 @@ void draw()
   
 }
 
+void keyPressed()
+{
+  if(key == ' ' && menuAdvance == 3 && telosAdv == 1)
+  {
+    menuAdvance = 2;
+    telosAdv = 0;
+  }
+  
+}
 void textDisplay(String text, TextForm size, int x, int y)
 {
   Word[size.Pos].text(text, x, y);  
@@ -303,7 +316,7 @@ void TelosCharacter()
   telosImage.resize(telosXPos, telosYPos); //Image Size
   imageMode(CENTER);
   image(telosImage, displayWidth / 2, displayHeight / 2, 320, 700);
-  
+    
   stroke(random(0,255),random(0,255),255);
   textDisplay("Telos", TextForm.Biggest, 50, 50);
   stroke(255,255,255);
@@ -415,9 +428,7 @@ void startMenu()
   selectStart.selectDisplay1(); //Start Object.
   selectEnd.selectDisplay2(); //End Object.
 
-  skippingToChar.SkipMenuFxn(); //Skip Object.
-  
-  
+  skippingToChar.SkipMenuFxn(); //Skip Object.  
   skipIntro.returnOption(); //Green roatating object.
   
   stroke(0); //Black colour for the letters.
@@ -426,25 +437,6 @@ void startMenu()
   textDisplay("Skip", TextForm.Biggest, 585, 540);
 }
 
-void keyPressed()
-{
-  //Going back to Character Select.
-  if(key == ' ' && menuAdvance == 3 && raxAdv == 1)
-  {
-    araxxorCharMusic.stop();
-    raxAdv = 0;
-    menuAdvance = 2;
-    
-  }
-  
-  //Going back to Character Select.
-  if( (key == 'z' || key == 'Z') && menuAdvance == 3 && telosAdv == 1)
-  {
-    telosCharMusic.stop();
-    telosAdv = 0;
-    menuAdvance = 2;
-  }
-}
 void mousePressed() 
 {
   mouseClickStart();  //For the Start Option (Menu 1)
@@ -453,6 +445,7 @@ void mousePressed()
   mouseClickAraxxor();//For the Araxxor Option (Menu 2)
   mouseClickSkipping(); //To skip to character menu.
   MainMenuReturn(); //Returning back to menu from character select.
+  TelosReturn(); //Returning back to character select from Telos.
 }
 
 void mouseReleased() 
@@ -464,6 +457,7 @@ void mouseReleased()
   mousePressedOnbox4 = false;
   mousePressedOnSkip = false;
   mousePressedOnMenu = false;
+  mousePressedOnTelos = false;
 }
 
 void characterSelect()
@@ -606,5 +600,26 @@ void MainMenuReturn()
     {
       mousePressedOnMenu = false; //If not, set to false.
     }
+  }
+}
+
+/* Method to go back from Telos to select character */
+void TelosReturn()
+{
+  //If statement to make sure you can't click from anywhere.
+  if(mouseOnboxTelos == true) //If true
+  {     
+    mousePressedOnTelos = true; //Set variable to true
+    fill(255, 255, 255); //To highlight the box.
+    clickSound = new SoundFile(this, "Click.mp3");
+    clickSound.play();
+        
+    //Going back to character select.
+    menuAdvance = 2;
+    telosAdv = 1;
+  } 
+  else 
+  {
+    mousePressedOnTelos = false; //If not, set to false.
   }
 }
