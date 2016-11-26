@@ -336,14 +336,13 @@ void TelosCharacter()
   
   telosImage = loadImage("Telos.png"); //Loading the image
   telosImage.resize(telosXPos, telosYPos); //Image Size
-  imageMode(CENTER);
-  image(telosImage, displayWidth / 2, displayHeight / 2, 320, 700);
+  image(telosImage, 480, 50, telosXPos, telosYPos);
     
   stroke(random(0,255),random(0,255),255);
   textDisplay("Telos", TextForm.Biggest, 50, 50);
   stroke(255,255,255);
   
-  if(frameCount / 60 % 2 == 0)
+  if(frameCount / 30 % 2 == 0)
   {
     textDisplay("Press 3 to Return to Menu", TextForm.Big, 290, 700);
   }
@@ -368,17 +367,15 @@ void AraxxorCharacter()
   
   araxxorImage = loadImage("Araxxor.png"); //Loading the image
   araxxorImage.resize(araxxorXPos, araxxorYPos); //Image Size
-  imageMode(CENTER);
-  image(araxxorImage, displayWidth / 2, displayHeight / 2,
-                      displayWidth / 2, displayHeight / 2);
-  
+  image(araxxorImage, 150, 100, araxxorXPos, araxxorYPos);
+                        
   stroke(random(0,255),random(0,255),255);
   textDisplay("Araxxor", TextForm.Big, 570, 50);
   stroke(255,255,255);
   
-  if(frameCount / 60 % 2 == 0)
+  if(frameCount / 30 % 2 == 0)
   {
-    textDisplay("Press 4 to Return to Menu", TextForm.Big, 290, 700);
+    textDisplay("Press 4 to Return to Menu", TextForm.Big, 310, 700);
   }
   
   //Variable so the music doesn't loop.
@@ -482,15 +479,6 @@ void mousePressed()
 
 }
 
-/* mouseReleased method for when the mouse is released. */ 
-void mouseReleased() 
-{
-  //If mouse released set it back to false.
-  mousePressedOnbox1 = false;
-  mousePressedOnbox2 = false; 
-  mousePressedOnSkip = false;
-}
-
 /* Selecting the character method */
 void characterSelect()
 {
@@ -522,13 +510,22 @@ void characterSelect()
   
   textDisplay("To Select", TextForm.Biggest, 480, 490);
   
-  if(frameCount / 60 % 2 == 0)
+  if(frameCount / 30 % 2 == 0)
   {
     textDisplay("Press Space to Return to Menu", TextForm.Big, 290, 700);
   }
   
   skipIntro.returnOption(); //Green roatating object.
        
+}
+
+/* mouseReleased method for when the mouse is released. */ 
+void mouseReleased() 
+{
+  //If mouse released set it back to false.
+  mousePressedOnbox1 = false;
+  mousePressedOnbox2 = false; 
+  mousePressedOnSkip = false;
 }
 
 /* Start button */
