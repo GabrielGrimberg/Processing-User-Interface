@@ -74,66 +74,6 @@ class MenuSelect
   fill(0);
   }
   
-  void selectDisplay3()
-  {
-    rectMode(RADIUS);
-    
-    if(mouseX > boxXPoint - sizeOfbox &&  //If statement to check
-       mouseX < boxXPoint + sizeOfbox &&  //If the mouse is anywhere
-       mouseY > boxYPoint - sizeOfbox &&  //near the box.
-       mouseY < boxYPoint + sizeOfbox)    
-       
-    {
-      mouseOnbox3 = true; //Set true, continue to mousePressed()
-    
-    if(mousePressedOnbox3 == false) 
-    { 
-      fill(0,255,0);
-    } 
-  } 
-  else 
-  {
-    stroke(153);
-    fill(153);
-    
-    mouseOnbox3 = false;
-  }
-  
-  //Drawing the box.
-  rect(boxXPoint, boxYPoint, sizeOfbox, sizeOfbox, boxCurve);
-  fill(0);
-  }
-  
-  void selectDisplay4()
-  {
-    rectMode(RADIUS);
-    
-    if(mouseX > boxXPoint - sizeOfbox &&  //If statement to check
-       mouseX < boxXPoint + sizeOfbox &&  //If the mouse is anywhere
-       mouseY > boxYPoint - sizeOfbox &&  //near the box.
-       mouseY < boxYPoint + sizeOfbox)    
-       
-    {
-      mouseOnbox4 = true; //Set true, continue to mousePressed()
-    
-    if(mousePressedOnbox4 == false) 
-    { 
-      fill(0,255,0);
-    } 
-  } 
-  else 
-  {
-    stroke(153);
-    fill(153);
-    
-    mouseOnbox4 = false;
-  }
-  
-  //Drawing the box.
-  rect(boxXPoint, boxYPoint, sizeOfbox, sizeOfbox, boxCurve);
-  fill(0);
-  }
-  
   void SkipMenuFxn()
   {
     rectMode(RADIUS);
@@ -157,66 +97,6 @@ class MenuSelect
     fill(153);
     
     mouseOnboxSkip = false;
-  }
-  
-  //Drawing the box.
-  rect(boxXPoint, boxYPoint, sizeOfbox, sizeOfbox, boxCurve);
-  fill(0);
-  }
-  
-  void BackToMenuFxn()
-  {
-    rectMode(RADIUS);
-    
-    if(mouseX > boxXPoint - sizeOfbox &&  //If statement to check
-       mouseX < boxXPoint + sizeOfbox &&  //If the mouse is anywhere
-       mouseY > boxYPoint - sizeOfbox &&  //near the box.
-       mouseY < boxYPoint + sizeOfbox)    
-       
-    {
-      mouseOnboxMenu = true; //Set true, continue to mousePressed()
-    
-    if(mousePressedOnMenu == false) 
-    { 
-      fill(0,255,0);
-    } 
-  } 
-  else 
-  {
-    stroke(153);
-    fill(153);
-    
-    mouseOnboxMenu = false;
-  }
-  
-  //Drawing the box.
-  rect(boxXPoint, boxYPoint, sizeOfbox, sizeOfbox, boxCurve);
-  fill(0);
-  }
-  
-  void ReturnFromTelos()
-  {
-    rectMode(RADIUS);
-    
-    if(mouseX > boxXPoint - sizeOfbox &&  //If statement to check
-       mouseX < boxXPoint + sizeOfbox &&  //If the mouse is anywhere
-       mouseY > boxYPoint - sizeOfbox &&  //near the box.
-       mouseY < boxYPoint + sizeOfbox)    
-       
-    {
-      mouseOnboxTelos = true; //Set true, continue to mousePressed()
-    
-    if(mousePressedOnTelos == false) 
-    { 
-      fill(0,255,0);
-    } 
-  } 
-  else 
-  {
-    stroke(153);
-    fill(153);
-    
-    mouseOnboxTelos = false;
   }
   
   //Drawing the box.
