@@ -217,7 +217,13 @@ void keyPressed()
     menuAdvance = 3;
     raxAdv = 1;
     
-  }  
+  }
+  
+  if(key == ' ' && menuAdvance == 2)
+  {
+    menuAdvance = 0;
+    
+  }
 }
 
 /* Method to display the text nicely */
@@ -465,7 +471,10 @@ void characterSelect()
   
   textDisplay("To Select", TextForm.Biggest, 480, 490);
   
-  textDisplay("Press Space to Return to Menu", TextForm.Big, 290, 700);
+  if(frameCount / 60 % 2 == 0)
+  {
+    textDisplay("Press Space to Return to Menu", TextForm.Big, 290, 700);
+  }
   
   skipIntro.returnOption(); //Green roatating object.
        
