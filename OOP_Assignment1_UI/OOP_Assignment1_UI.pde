@@ -75,6 +75,14 @@ float cameraZoomRax;
 float cameraZoomNomad;
 float cameraZoomBM;
 float cameraZoomVind;
+
+/* Speed for the dimming for the loading screen */
+float speedPOfTint;
+float speedPOfTint2;
+float speedPOfTint3;
+float speedPOfTint4;
+float speedPOfTint5;
+float SELECTSPEED = 8; //Speed that the brightness goes up.
 int noRepeatBG = 0; //Checker to stop the if statements which reduce the framerate.
 
 /* Variables for the return option. */ 
@@ -254,55 +262,69 @@ void textDisplay(String text, TextForm size, int x, int y)
 void startTelos()
 {
   PImage telosPic; //Image Variable
-  
+
+  tint(speedPOfTint);
   telosPic = loadImage("TelosBackground.jpg"); //Loading the image
   telosPic.resize(displayWidth, displayHeight); //Image Size
   image(telosPic,0,0,displayWidth + cameraZoomTelos,displayHeight + cameraZoomTelos); //Image Position 
   cameraZoomTelos += 1; //Image movement speed.
+  speedPOfTint += SELECTSPEED;
 }
 
 /* Background Image 2: Araxxor */
 void Araxxor()
 {
   PImage araxxorPic; //Image Variable
+  speedPOfTint = 0;
   
+  tint(speedPOfTint2);
   araxxorPic = loadImage("rax.jpg"); //Loading the image
   araxxorPic.resize(displayWidth, displayHeight); //Image Size
   image(araxxorPic,0,0,displayWidth + cameraZoomRax,displayHeight + cameraZoomRax); //Image Position
   cameraZoomRax += 1; //Image movement speed.
+  speedPOfTint2 += SELECTSPEED;
 }
 
 /* Background Image 3: Nomad */
 void Nomad()
 {
   PImage nomadPic; //Image Variable
+  speedPOfTint2 = 0;
   
+  tint(speedPOfTint3);
   nomadPic = loadImage("Nomad.jpg"); //Loading the image
   nomadPic.resize(displayWidth, displayHeight); //Image Size
   image(nomadPic,0,0,displayWidth + cameraZoomNomad,displayHeight + cameraZoomNomad); //Image Position
   cameraZoomNomad += 1; //Image movement speed.
+  speedPOfTint3 += SELECTSPEED;
 }
 
 /* Background Image 4: Beastemaster Durzag */
 void BM()
 {
   PImage BMPic; //Image Variable
+  speedPOfTint3 = 0;
   
+  tint(speedPOfTint4);
   BMPic = loadImage("BM.jpg"); //Loading the image
   BMPic.resize(displayWidth, displayHeight); //Image Size
   image(BMPic,0,0,displayWidth + cameraZoomBM,displayHeight + cameraZoomBM); //Image Position
   cameraZoomBM += 1; //Image movement speed.
+  speedPOfTint4 += SELECTSPEED;
 }
 
 /* Background Image 5: Vind */
 void Vind()
 {
   PImage vindPic; //Image Variable
+  speedPOfTint4 = 0;
   
+  tint(speedPOfTint5);
   vindPic = loadImage("Vind.jpg"); //Loading the image
   vindPic.resize(displayWidth, displayHeight); //Image Size
   image(vindPic,0,0,displayWidth + cameraZoomVind,displayHeight + cameraZoomVind); //Image Position
   cameraZoomVind += 1; //Image movement speed.
+  speedPOfTint5 += SELECTSPEED;
 }
 
 /* Telos Character Method */
@@ -320,7 +342,11 @@ void TelosCharacter()
   stroke(random(0,255),random(0,255),255);
   textDisplay("Telos", TextForm.Biggest, 50, 50);
   stroke(255,255,255);
-  textDisplay("Click On Buttons", TextForm.Big, 60, 700);
+  
+  if(frameCount / 60 % 2 == 0)
+  {
+    textDisplay("Press 3 to Return to Menu", TextForm.Big, 290, 700);
+  }
   
   selectOnTelos1.CircleDisplay();
   selectOnTelos2.CircleDisplay();
@@ -349,7 +375,11 @@ void AraxxorCharacter()
   stroke(random(0,255),random(0,255),255);
   textDisplay("Araxxor", TextForm.Big, 570, 50);
   stroke(255,255,255);
-  textDisplay("Click On Buttons", TextForm.Big, 60, 700);
+  
+  if(frameCount / 60 % 2 == 0)
+  {
+    textDisplay("Press 4 to Return to Menu", TextForm.Big, 290, 700);
+  }
   
   //Variable so the music doesn't loop.
   if(noMusicRepeat == 0)
