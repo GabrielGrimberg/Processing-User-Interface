@@ -219,10 +219,28 @@ void keyPressed()
     
   }
   
+  /* Going back to Main Menu */
   if(key == ' ' && menuAdvance == 2)
   {
     menuAdvance = 0;
-    
+  }
+  
+  /* Going back to selecting character from: Telos */
+  if(key == '3' && menuAdvance == 3 && telosAdv == 1)
+  {
+    menuAdvance = 2;
+    telosAdv = 0;
+    telosCharMusic.stop(); //Telos Music.
+    noMusicRepeat = 0;
+  }
+  
+  /* Going back to selecting character from: Araxxor */
+  if(key == '4' && menuAdvance == 3 && raxAdv == 1)
+  {
+    menuAdvance = 2;
+    raxAdv = 0;
+    araxxorCharMusic.stop(); //Rax Music.
+    noMusicRepeat = 0;
   }
 }
 
@@ -303,6 +321,9 @@ void TelosCharacter()
   textDisplay("Telos", TextForm.Biggest, 50, 50);
   stroke(255,255,255);
   textDisplay("Click On Buttons", TextForm.Big, 60, 700);
+  
+  selectOnTelos1.CircleDisplay();
+  selectOnTelos2.CircleDisplay();
   
   if(noMusicRepeat == 0)
   {

@@ -8,12 +8,13 @@ class PartSelecting
     Location = new PVector(xPos,yPos);
     circleGlow = glowingPart;
   }
-  void display()
+  void CircleDisplay()
   {
     if(circleGlow == true)
     {
-      float glowRadius = 100.0 + 15 * sin(frameCount / (3 * frameRate) * TWO_PI); 
-      strokeWeight(2);
+      float glowRadius = 100.0; 
+      //float glowRadius = 100.0 + 15 * sin(frameCount / (3 * frameRate) * TWO_PI); //Not working good.
+      strokeWeight(1.2);
       fill(255, 0);
       
       for(int i = 0; i < glowRadius; i++)
