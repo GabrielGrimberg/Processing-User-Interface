@@ -119,8 +119,8 @@ void setup()
   Border = width * 0.1f;
   
   /* Printing the Results */
-  telosPrintData();
-  raxPrintData();
+  //telosPrintData();
+  //raxPrintData();
 
   
   for(TextForm Amount : TextForm.values())
@@ -380,6 +380,8 @@ void keyPressed()
   /* Return from Telos Graph to Character Select */
   if(key == ' ' && menuAdvance == 4 && telosAdv == 1)
   {
+    telosCharMusic.stop(); //Telos Music.
+    noMusicRepeat = 0;
     menuAdvance = 2;
     telosAdv = 0;
   }
@@ -387,6 +389,8 @@ void keyPressed()
   /* Return from Araxxor Graph to Character Select */
   if(key == ' ' && menuAdvance == 4 && raxAdv == 1)
   {
+    araxxorCharMusic.stop(); //Rax Music.
+    noMusicRepeat = 0;
     menuAdvance = 2;
     raxAdv = 0;
   }
@@ -394,6 +398,8 @@ void keyPressed()
   /* Return from Telos Live Graph to Character Select */
   if(key == ' ' && menuAdvance == 5 && telosAdv == 1)
   {
+    telosCharMusic.stop(); //Telos Music.
+    noMusicRepeat = 0;
     menuAdvance = 2;
     telosAdv = 0;
   }
@@ -401,6 +407,8 @@ void keyPressed()
   /* Return from Araxxor Live Graph to Character Select */
   if(key == ' ' && menuAdvance == 5 && raxAdv == 1)
   {
+    araxxorCharMusic.stop(); //Rax Music.
+    noMusicRepeat = 0;
     menuAdvance = 2;
     raxAdv = 0;
   }
@@ -789,8 +797,8 @@ void telosGraphPlot()
 void telosGraphDraw()
 {
   stroke(0,255,0);
-  line(Border - 25, height - Border, width - Border, height - Border);
-  line(Border, Border, Border, height - Border + 25);
+  line(Border, height - Border, width - Border, height - Border);
+  line(Border, Border, Border, height - Border);
   
   
   for (int i = 1 ; i < telosArray.size() ; i ++)
@@ -838,8 +846,8 @@ void raxGraphPlot()
 void raxGraphDraw()
 {
   stroke(255,0,0);
-  line(Border - 25, height - Border, width - Border, height - Border);
-  line(Border, Border, Border, height - Border + 25);
+  line(Border, height - Border, width - Border, height - Border);
+  line(Border, Border, Border, height - Border);
   
   
   for(int i = 1 ; i < raxArray.size() ; i ++)
@@ -870,7 +878,8 @@ void raxGraphDraw()
 void graphRenderLive()
 {
   background(0);
- 
+  
+  clear();
   //Going over and over through the tables.
   for(int i = 0; i < LiveGraph.getRowCount(); i++) 
   { 
@@ -905,4 +914,5 @@ void graphUpdateLive()
   
   //Random Values for Width.
   Row.setFloat("Width", (LiveGraph.getRowCount()-1));
+  
 }
