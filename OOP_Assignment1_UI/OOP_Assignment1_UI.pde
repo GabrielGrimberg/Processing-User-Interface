@@ -287,8 +287,18 @@ void draw()
         textDisplay("Press Space to Return to Menu", TextForm.Big, 290, 700);
       }
       
+      stroke(0,255,0);
+      textDisplay("Kills", TextForm.Normal, 1200, 50);
+      
+      stroke(255,0,0);
+      textDisplay("Deaths", TextForm.Normal, 1200, 700);
+      
       stroke(255);
       textDisplay("Telos Live Graph", TextForm.Big, 450, 50);
+      
+      //Kill/Death Ratio.
+      line(0, displayHeight / 2, displayWidth , displayHeight / 2);
+      line(20, 0, 0 , displayWidth);
     }
     
     if(raxAdv == 1)
@@ -304,8 +314,18 @@ void draw()
         textDisplay("Press Space to Return to Menu", TextForm.Big, 290, 700);
       }
       
+      stroke(0,255,0);
+      textDisplay("Kills", TextForm.Normal, 1200, 50);
+      
+      stroke(255,0,0);
+      textDisplay("Deaths", TextForm.Normal, 1200, 700);
+      
       stroke(255);
       textDisplay("Araxxor Live Graph", TextForm.Big, 450, 50);
+      
+      //Kill/Death Ratio.
+      line(0, displayHeight / 2, displayWidth , displayHeight / 2);
+      line(20, 0, 0 , displayWidth);
     }
     
   }
@@ -315,6 +335,7 @@ void draw()
 /* Gameflow */
 void keyPressed()
 {
+  /* Selecting Telos */
   if(key == '1' && menuAdvance == 2 && telosAdv == 0)
   {
     menuAdvance = 3;
@@ -322,6 +343,7 @@ void keyPressed()
     
   }
   
+  /* Selecting Araxxor */
   if(key == '2' && menuAdvance == 2 && raxAdv == 0)
   {
     menuAdvance = 3;
@@ -881,7 +903,7 @@ void graphRenderLive()
   
   clear();
   //Going over and over through the tables.
-  for(int i = 0; i < LiveGraph.getRowCount(); i++) 
+  for(int i = 20; i < LiveGraph.getRowCount(); i++) 
   { 
     TableRow Row = LiveGraph.getRow(i);
     
