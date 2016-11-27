@@ -12,3 +12,11 @@ I have devloped the User Interface and changed it as I kept getting new ideas, I
 
 ##### Update: 27th of November 2016
 Code has been heavily refactored, a lot of fixing done with the character select menu, navigation throughout the UI and now works, last task for this assignment is to make use of the file I/O and create some nice bar chart statistics for the chracters.
+
+Graphs have now been added both for Telos and Araxxor, the last part I look to get done is the live graph which shows the hits made by the boss.
+
+##### Testing
+Coming Soon...
+
+##### Evaluation
+Coming Soon...
