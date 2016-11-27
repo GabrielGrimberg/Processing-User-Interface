@@ -36,6 +36,8 @@ SoundFile backgroundMusic; //Intro Music.
 SoundFile telosCharMusic; //Telos Music.
 SoundFile araxxorCharMusic; //Rax Music.
 
+Table telosLive;
+
 /* Global Variables */
 
 /* Variables for reading for stats */
@@ -139,6 +141,13 @@ void setup()
   
   selectOnAraxxor1 = new PartSelecting(700, 250, true);
   selectOnAraxxor2 = new PartSelecting(1085, 500, true);
+  
+  /*** Graph 2 ***/
+  
+  //Telos Live Graph  
+  telosLive = new Table();
+  telosLive.addColumn("Depth");
+  telosLive.addColumn("Width");
 }
 
 void draw()
@@ -258,6 +267,43 @@ void draw()
     
   }
   
+  if(menuAdvance == 5)
+  {
+    if(telosAdv == 1)
+    {
+      clear();
+      frameRate(10);
+      stroke(0,255,0);
+      graphRenderLive();
+      
+      if(frameCount / 30 % 2 == 0)
+      {
+        textDisplay("Press Space to Return to Menu", TextForm.Big, 290, 700);
+      }
+      
+      stroke(255);
+      textDisplay("Telos Live Graph", TextForm.Big, 450, 50);
+    }
+    
+    if(raxAdv == 1)
+    {
+      clear();
+      frameRate(20);
+      stroke(255,0,0);
+      
+      graphRenderLive();
+      
+      if(frameCount / 30 % 2 == 0)
+      {
+        textDisplay("Press Space to Return to Menu", TextForm.Big, 290, 700);
+      }
+      
+      stroke(255);
+      textDisplay("Araxxor Live Graph", TextForm.Big, 450, 50);
+    }
+    
+  }
+  
 }
 
 /* Gameflow */
@@ -311,6 +357,18 @@ void keyPressed()
   if(key == '3' && menuAdvance == 3 && raxAdv == 1)
   {
     menuAdvance = 4;
+  }
+  
+  /* Telos stats Grahp*/
+  if(key == '4' && menuAdvance == 3 && telosAdv == 1)
+  {
+    menuAdvance = 5;
+  }
+  
+  /* Araxxor stats Grahp*/
+  if(key == '4' && menuAdvance == 3 && raxAdv == 1)
+  {
+    menuAdvance = 5;
   }
   
   /* Return from Telos Graph to Character Select */
@@ -785,4 +843,41 @@ void raxGraphDraw()
       text("Loot Table: " + raxArray.get(i - 1).Package, xPos1 + 10, yPos1 + 30);
     } 
   }  
+}
+
+/*** Telos Live Graph ***/
+
+void graphRenderLive()
+{
+  background(0);
+ 
+  // iterate over table-rows
+  for (int i = 0; i < telosLive.getRowCount(); i++) 
+  { 
+    TableRow row = telosLive.getRow(i);
+    
+    //Drawing the lines
+    float x = row.getFloat("Width") * 5; 
+    float y = row.getFloat("Depth") * 5; 
+ 
+    // lines (connect this point with the last one)
+    if(i > 0) 
+    {
+      TableRow lastRow = telosLive.getRow(i-1);
+      float lastX = lastRow.getFloat("Width") * 5; 
+      float lastY = lastRow.getFloat("Depth") * 5; 
+ 
+      line(lastX, lastY, x, y);
+    }
+  }
+  graphUpdateLive();
+}
+
+void graphUpdateLive() 
+{
+  TableRow row = telosLive.addRow();
+  // random value for depth
+  row.setFloat("Depth", height / 5 * noise(telosLive.getRowCount()/1.0));
+  // continious values for width
+  row.setFloat("Width", (telosLive.getRowCount()-1));
 }
