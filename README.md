@@ -9,3 +9,6 @@ My first idea was to make something on a game that I play or used to play, I hav
 
 ##### Update: 1st of November 2016
 I have devloped the User Interface and changed it as I kept getting new ideas, I have added a loading screen and background images which I hope to make them zoom in smoothly, the starting menu and the character select menu are complete the main focus now is to work on the characters and add the some cool features to them.
+
+##### Update: 27th of November 2016
+Code has been heavily refactored, a lot of fixing done with the character select menu, navigation throughout the UI and now works, last task for this assignment is to make use of the file I/O and create some nice bar chart statistics for the chracters.
