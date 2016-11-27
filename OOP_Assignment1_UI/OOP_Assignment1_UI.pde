@@ -27,6 +27,8 @@ ObjectRotate skipIntro;
 /*Clicking Objects */
 PartSelecting selectOnTelos1;
 PartSelecting selectOnTelos2;
+PartSelecting selectOnAraxxor1;
+PartSelecting selectOnAraxxor2;
 
 /* Sound Files */
 SoundFile clickSound; //Clicking Sound.
@@ -134,6 +136,9 @@ void setup()
   
   selectOnTelos1 = new PartSelecting(625, 320, true);
   selectOnTelos2 = new PartSelecting(displayWidth / 1.7, displayHeight / 1.5, true);
+  
+  selectOnAraxxor1 = new PartSelecting(700, 250, true);
+  selectOnAraxxor2 = new PartSelecting(1085, 500, true);
 }
 
 void draw()
@@ -415,10 +420,12 @@ void TelosCharacter()
   
   if(frameCount / 30 % 2 == 0)
   {
+    stroke(0,255,0);
     textDisplay("Press Space to", TextForm.Big, 50, 650);
     textDisplay("Return to Menu", TextForm.Big, 50, 700);
   }
   
+  stroke(0,255,0);
   textDisplay("Use Your", TextForm.Big, 825, 400);
   textDisplay("Keyboard To Select", TextForm.Big, 825, 450);
   
@@ -448,15 +455,28 @@ void AraxxorCharacter()
   araxxorImage = loadImage("Araxxor.png"); //Loading the image
   araxxorImage.resize(araxxorXPos, araxxorYPos); //Image Size
   image(araxxorImage, 150, 100, araxxorXPos, araxxorYPos);
-                        
+  
+  stroke(255,0,0);
+  textDisplay("Use Your", TextForm.Big, 825, 50);
+  textDisplay("Keyboard To Select", TextForm.Big, 825, 100);
+  
+  if(frameCount / 30 % 2 == 0)
+  {
+    stroke(255,0,0);
+    textDisplay("Press Space to Return to Menu", TextForm.Big, 310, 700);
+  }
+  
   stroke(random(0,255),random(0,255),255);
   textDisplay("Araxxor", TextForm.Big, 570, 50);
   stroke(255,255,255);
   
-  if(frameCount / 30 % 2 == 0)
-  {
-    textDisplay("Press Space to Return to Menu", TextForm.Big, 310, 700);
-  }
+  selectOnAraxxor1.CircleDisplay();
+  stroke(random(0,255),random(0,255),255);
+  textDisplay("3", TextForm.Biggest, 685, 225);
+  
+  selectOnAraxxor2.CircleDisplay();
+  stroke(random(0,255),random(0,255),255);
+  textDisplay("4", TextForm.Biggest, 1070, 480);
   
   //Variable so the music doesn't loop.
   if(noMusicRepeat == 0)
