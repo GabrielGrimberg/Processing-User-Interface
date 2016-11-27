@@ -36,7 +36,7 @@ SoundFile backgroundMusic; //Intro Music.
 SoundFile telosCharMusic; //Telos Music.
 SoundFile araxxorCharMusic; //Rax Music.
 
-Table telosLive;
+Table LiveGraph;
 
 /* Global Variables */
 
@@ -144,10 +144,10 @@ void setup()
   
   /*** Graph 2 ***/
   
-  //Telos Live Graph  
-  telosLive = new Table();
-  telosLive.addColumn("Depth");
-  telosLive.addColumn("Width");
+  //Live Graph 
+  LiveGraph = new Table();
+  LiveGraph.addColumn("Height");
+  LiveGraph.addColumn("Width");
 }
 
 void draw()
@@ -158,6 +158,7 @@ void draw()
   
   rollingTheTime += timeDelta;
   
+  /* Start up menu */
   if(menuAdvance == 0)
   {
     startMenu();
@@ -174,6 +175,7 @@ void draw()
     }
   }
   
+  /* Loading Screen */
   if(menuAdvance == 1)
   {
     if(rollingTheTime > 5 && noRepeatBG == 0) //5 seconds
@@ -215,6 +217,7 @@ void draw()
     }
   }
   
+  /* Character Select Menu */
   if(menuAdvance == 2)
   {
     //clear(); //Clears the introduction images.
@@ -222,6 +225,7 @@ void draw()
     
   }
   
+  /* Inside the characters */
   if(menuAdvance == 3)
   {
     if(telosAdv == 1)
@@ -237,6 +241,7 @@ void draw()
     }
   }
   
+  /* Stats graph for the chracters */
   if(menuAdvance == 4)
   {
     if(telosAdv == 1)
@@ -267,6 +272,7 @@ void draw()
     
   }
   
+  /* Live graph for the chracters */
   if(menuAdvance == 5)
   {
     if(telosAdv == 1)
@@ -380,6 +386,20 @@ void keyPressed()
   
   /* Return from Araxxor Graph to Character Select */
   if(key == ' ' && menuAdvance == 4 && raxAdv == 1)
+  {
+    menuAdvance = 2;
+    raxAdv = 0;
+  }
+  
+  /* Return from Telos Live Graph to Character Select */
+  if(key == ' ' && menuAdvance == 5 && telosAdv == 1)
+  {
+    menuAdvance = 2;
+    telosAdv = 0;
+  }
+  
+  /* Return from Araxxor Live Graph to Character Select */
+  if(key == ' ' && menuAdvance == 5 && raxAdv == 1)
   {
     menuAdvance = 2;
     raxAdv = 0;
@@ -851,33 +871,38 @@ void graphRenderLive()
 {
   background(0);
  
-  // iterate over table-rows
-  for (int i = 0; i < telosLive.getRowCount(); i++) 
+  //Going over and over through the tables.
+  for(int i = 0; i < LiveGraph.getRowCount(); i++) 
   { 
-    TableRow row = telosLive.getRow(i);
+    TableRow Row = LiveGraph.getRow(i);
     
     //Drawing the lines
-    float x = row.getFloat("Width") * 5; 
-    float y = row.getFloat("Depth") * 5; 
+    float FirstxPos = Row.getFloat("Width") * 5; 
+    float FirstyPos = Row.getFloat("Height") * 5; 
  
-    // lines (connect this point with the last one)
+    //Connecting the lines of the graph.
     if(i > 0) 
     {
-      TableRow lastRow = telosLive.getRow(i-1);
-      float lastX = lastRow.getFloat("Width") * 5; 
-      float lastY = lastRow.getFloat("Depth") * 5; 
- 
-      line(lastX, lastY, x, y);
+      TableRow lastRow = LiveGraph.getRow(i-1);
+      float lastXPos = lastRow.getFloat("Width") * 5; 
+      float lastYPos = lastRow.getFloat("Height") * 5; 
+      
+      //Drawing the lines for the graph.
+      line(lastXPos, lastYPos, FirstxPos, FirstyPos);
     }
   }
+  
+  //The update method to set the random values.
   graphUpdateLive();
 }
 
 void graphUpdateLive() 
 {
-  TableRow row = telosLive.addRow();
-  // random value for depth
-  row.setFloat("Depth", height / 5 * noise(telosLive.getRowCount()/1.0));
-  // continious values for width
-  row.setFloat("Width", (telosLive.getRowCount()-1));
+  TableRow Row = LiveGraph.addRow();
+  
+  //Random Values for Height
+  Row.setFloat("Height", height / 5 * noise(LiveGraph.getRowCount() / 1.0));
+  
+  //Random Values for Width.
+  Row.setFloat("Width", (LiveGraph.getRowCount()-1));
 }
