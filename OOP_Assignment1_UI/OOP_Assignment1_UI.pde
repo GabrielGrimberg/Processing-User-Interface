@@ -235,7 +235,7 @@ void draw()
       }
       
       stroke(255);
-      textDisplay("Araxxor Combat Statistics", TextForm.Big, 350, 50);
+      textDisplay("Telos Combat Statistics", TextForm.Big, 350, 50);
     }
     
     if(raxAdv == 1)
@@ -700,13 +700,12 @@ void telosGraphDraw()
     if (mouseX >= xPos1 && mouseX <= xPos2)
     {      
       fill(0);
-      line(xPos1, Border, xPos1, height - Border);
-      ellipse(xPos1, yPos1, 10, 10);
+      rect(xPos1, yPos1, 5, 5);
       fill(255);
       text("Enrage: " + telosArray.get(i - 1).HighestEnrage, xPos1 + 10, yPos1);
-      text("Max Hit: " + telosArray.get(i - 1).MaxHit, xPos1 + 10, yPos1 + 10);
-      text("Min Hit: " + telosArray.get(i - 1).MinHit, xPos1 + 10, yPos1 + 20);
-      text("Package: " + telosArray.get(i - 1).Package, xPos1 + 10, yPos1 + 30);
+      text("Maximum Hit: " + telosArray.get(i - 1).MaxHit, xPos1 + 10, yPos1 + 10);
+      text("Minimum Hit: " + telosArray.get(i - 1).MinHit, xPos1 + 10, yPos1 + 20);
+      text("Loot Table: " + telosArray.get(i - 1).Package, xPos1 + 10, yPos1 + 30);
     } 
   }  
 }
@@ -750,13 +749,12 @@ void raxGraphDraw()
     if (mouseX >= xPos1 && mouseX <= xPos2)
     {      
       fill(0);
-      line(xPos1, Border, xPos1, height - Border);
-      ellipse(xPos1, yPos1, 10, 10);
+      rect(xPos1, yPos1, 5, 5);
       fill(255);
       text("Enrage: " + raxArray.get(i - 1).HighestEnrage, xPos1 + 10, yPos1);
-      text("Max Hit: " + raxArray.get(i - 1).MaxHit, xPos1 + 10, yPos1 + 10);
-      text("Min Hit: " + raxArray.get(i - 1).MinHit, xPos1 + 10, yPos1 + 20);
-      text("Package: " + raxArray.get(i - 1).Package, xPos1 + 10, yPos1 + 30);
+      text("Maximum Hit: " + raxArray.get(i - 1).MaxHit, xPos1 + 10, yPos1 + 10);
+      text("Minimum Hit: " + raxArray.get(i - 1).MinHit, xPos1 + 10, yPos1 + 20);
+      text("Loot Table: " + raxArray.get(i - 1).Package, xPos1 + 10, yPos1 + 30);
     } 
   }  
 }
