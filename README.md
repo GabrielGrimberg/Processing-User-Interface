@@ -15,11 +15,17 @@ A repository for my first OOP assignment in second year.
 
 - Graphs have now been added both for Telos and Araxxor, the last part I look to get done is the live graph which shows the hits made by the boss.
 
+- Live graphs have now been added to both of the chracters.
+
 #### Testing
-- Coming Soon...
+- This program has been tested on a Mac and it works without any bugs, navigation works the way it should work, you can only watch the loading screen once, once you have selected it you can't select it again.
+
+- Skip button works perfectly which replaces the loading screen button once it has been used or can be used at any time.
+
+- Selecting characters works the way it should work and the graphs display extremely well. File I/O displays correctly too which gives the correct results for the statistics graphs.
 
 #### Evaluation
-- Coming Soon...
+- Overall I am happy with my project, the loading screen aspect was the one that I liked the most, the images zoom in slowly while they dim up their brightness while playing the suitable music intro track for it.
 
 #### Credits
 
