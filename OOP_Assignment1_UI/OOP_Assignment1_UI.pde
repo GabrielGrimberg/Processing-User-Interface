@@ -19,7 +19,7 @@ MovingLetters[] Word = new MovingLetters[3]; //<- How many enums.
 MenuSelect selectStart;    //Object for Start Menu
 MenuSelect selectEnd;      //Object for End Menu
 LoadingScreen loadingWait; //Object for Loading Bar
-MenuSelect skippingToChar;  //Object for Araxxor Menu
+MenuSelect skippingToChar; //Object for Araxxor Menu
 
 /* Roatating Object */
 ObjectRotate skipIntro;
@@ -229,12 +229,26 @@ void draw()
     {
       clear();
       telosGraphDraw();
+      if(frameCount / 30 % 2 == 0)
+      {
+        textDisplay("Press Space to Return to Menu", TextForm.Big, 290, 700);
+      }
+      
+      stroke(255);
+      textDisplay("Araxxor Combat Statistics", TextForm.Big, 350, 50);
     }
     
     if(raxAdv == 1)
     {
       clear();
       raxGraphDraw();
+      if(frameCount / 30 % 2 == 0)
+      {
+        textDisplay("Press Space to Return to Menu", TextForm.Big, 290, 700);
+      }
+      
+      stroke(255);
+      textDisplay("Araxxor Combat Statistics", TextForm.Big, 350, 50);
     }
     
   }
@@ -265,7 +279,7 @@ void keyPressed()
   }
   
   /* Going back to selecting character from: Telos */
-  if(key == '3' && menuAdvance == 3 && telosAdv == 1)
+  if(key == ' ' && menuAdvance == 3 && telosAdv == 1)
   {
     menuAdvance = 2;
     telosAdv = 0;
@@ -274,7 +288,7 @@ void keyPressed()
   }
   
   /* Going back to selecting character from: Araxxor */
-  if(key == '4' && menuAdvance == 3 && raxAdv == 1)
+  if(key == ' ' && menuAdvance == 3 && raxAdv == 1)
   {
     menuAdvance = 2;
     raxAdv = 0;
@@ -401,7 +415,8 @@ void TelosCharacter()
   
   if(frameCount / 30 % 2 == 0)
   {
-    textDisplay("Press 3 to Return to Menu", TextForm.Big, 290, 700);
+    textDisplay("Press Space to", TextForm.Big, 50, 650);
+    textDisplay("Return to Menu", TextForm.Big, 50, 700);
   }
   
   selectOnTelos1.CircleDisplay();
@@ -432,7 +447,7 @@ void AraxxorCharacter()
   
   if(frameCount / 30 % 2 == 0)
   {
-    textDisplay("Press 4 to Return to Menu", TextForm.Big, 310, 700);
+    textDisplay("Press Space to Return to Menu", TextForm.Big, 310, 700);
   }
   
   //Variable so the music doesn't loop.
