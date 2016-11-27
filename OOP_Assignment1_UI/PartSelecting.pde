@@ -12,11 +12,16 @@ class PartSelecting
   {
     if(circleGlow == true)
     {
-      float glowRadius = 100.0; 
-      //float glowRadius = 100.0 + 15 * sin(frameCount / (3 * frameRate) * TWO_PI); //Not working good.
+      //How fast and how much the circles expands.
+      float glowRadius = 100.0 + 10 * sin(frameCount / (2 * frameRate) * TWO_PI);
+      
+      //Stroke weight for the circle.
+      
+      //Colour for the circle.
       strokeWeight(1.2);
       fill(255, 0);
       
+      //Resizing of the circle.
       for(int i = 0; i < glowRadius; i++)
       {
         stroke(255, 255.0 * (1 - i / glowRadius) );

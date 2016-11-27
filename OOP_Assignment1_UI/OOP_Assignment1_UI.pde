@@ -132,7 +132,7 @@ void setup()
   loadingWait = new LoadingScreen(200);
   skipIntro = new ObjectRotate(1.93,2.3);
   
-  selectOnTelos1 = new PartSelecting(displayWidth / 2.3, displayHeight / 1.5, true);
+  selectOnTelos1 = new PartSelecting(625, 320, true);
   selectOnTelos2 = new PartSelecting(displayWidth / 1.7, displayHeight / 1.5, true);
 }
 
@@ -297,13 +297,13 @@ void keyPressed()
   }
   
   /* Telos stats Grahp*/
-  if(key == '5' && menuAdvance == 3 && telosAdv == 1)
+  if(key == '3' && menuAdvance == 3 && telosAdv == 1)
   {
     menuAdvance = 4;
   }
   
-  /* Telos stats Grahp*/
-  if(key == '6' && menuAdvance == 3 && raxAdv == 1)
+  /* Araxxor stats Grahp*/
+  if(key == '3' && menuAdvance == 3 && raxAdv == 1)
   {
     menuAdvance = 4;
   }
@@ -419,8 +419,16 @@ void TelosCharacter()
     textDisplay("Return to Menu", TextForm.Big, 50, 700);
   }
   
+  textDisplay("Use Your", TextForm.Big, 825, 400);
+  textDisplay("Keyboard To Select", TextForm.Big, 825, 450);
+  
   selectOnTelos1.CircleDisplay();
+  stroke(random(0,255),random(0,255),255);
+  textDisplay("3", TextForm.Biggest, 610, 295);
+  
   selectOnTelos2.CircleDisplay();
+  stroke(random(0,255),random(0,255),255);
+  textDisplay("4", TextForm.Biggest, 740, 510);
   
   if(noMusicRepeat == 0)
   {
