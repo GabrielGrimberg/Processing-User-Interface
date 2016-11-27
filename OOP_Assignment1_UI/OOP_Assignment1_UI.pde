@@ -88,6 +88,11 @@ int noRepeatBG = 0; //Checker to stop the if statements which reduce the framera
 /* Variables for the return option. */ 
 float bendAmount = 20; //Used for the increase when mouse pointing away.
 
+/* Variables for the Telos graph */
+float Border;
+float StartingPoint;
+float EndingPoint;
+
 
 void setup()
 {
@@ -99,6 +104,10 @@ void setup()
   /* Reading the text files */
   telosLoadData();
   raxLoadData();
+  
+  /* Creating the graph */
+  telosGraphPlot();
+  Border = width * 0.1f;
   
   /* Printing the Results */
   telosPrintData();
@@ -208,6 +217,21 @@ void draw()
     }
   }
   
+  if(menuAdvance == 4)
+  {
+    if(telosAdv == 1)
+    {
+      clear();
+      telosGraphDraw();
+    }
+    
+    if(raxAdv == 1)
+    {
+      
+    }
+    
+  }
+  
 }
 
 /* Currently for debugging */
@@ -249,6 +273,12 @@ void keyPressed()
     raxAdv = 0;
     araxxorCharMusic.stop(); //Rax Music.
     noMusicRepeat = 0;
+  }
+  
+  /* Going back to selecting character from: Araxxor */
+  if(key == '5' && menuAdvance == 3 && telosAdv == 1)
+  {
+    menuAdvance = 4;
   }
 }
 
@@ -585,4 +615,55 @@ void mouseClickSkipping()
       mousePressedOnSkip = false; //If not, set to false.
     }
   }
+}
+
+/***Character Features Below ***/
+
+/* Making the graph */
+void telosGraphPlot()
+{
+  StartingPoint = EndingPoint = telosArray.get(0).HighestEnrage; 
+  for (Telos Enrage: telosArray)
+  {
+    if(Enrage.HighestEnrage < StartingPoint)
+    {
+      StartingPoint = Enrage.HighestEnrage;
+    }
+    if (Enrage.HighestEnrage > EndingPoint)
+    {
+      EndingPoint = Enrage.HighestEnrage;
+    }    
+  }
+}
+
+/* Drawing the graph */
+void telosGraphDraw()
+{
+  stroke(0,255,0);
+  line(Border - 25, height - Border, width - Border, height - Border);
+  line(Border, Border, Border, height - Border + 25);
+  
+  
+  for (int i = 1 ; i < telosArray.size() ; i ++)
+  {
+    stroke(0,255,0);
+    float xPos1 = map(i - 1, 0, telosArray.size() - 1, Border, width - Border);
+    float yPos1 = map(telosArray.get(i - 1).HighestEnrage, StartingPoint, EndingPoint, height - Border, Border);
+    float xPos2 = map(i, 0, telosArray.size() - 1, Border, width - Border);
+    float yPos2 = map(telosArray.get(i).HighestEnrage, StartingPoint, EndingPoint, height - Border, Border);
+    line(xPos1, yPos1, xPos2, yPos2);
+    
+    //Display results while moving the mouse.
+    if (mouseX >= xPos1 && mouseX <= xPos2)
+    {      
+      fill(0);
+      line(xPos1, Border, xPos1, height - Border);
+      ellipse(xPos1, yPos1, 10, 10);
+      fill(255);
+      text("Enrage: " + telosArray.get(i - 1).HighestEnrage, xPos1 + 10, yPos1);
+      text("Max Hit: " + telosArray.get(i - 1).MaxHit, xPos1 + 10, yPos1 + 10);
+      text("Min Hit: " + telosArray.get(i - 1).MinHit, xPos1 + 10, yPos1 + 20);
+      text("Package: " + telosArray.get(i - 1).Package, xPos1 + 10, yPos1 + 30);
+    } 
+  }  
 }
