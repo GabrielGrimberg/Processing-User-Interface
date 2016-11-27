@@ -293,6 +293,20 @@ void keyPressed()
   {
     menuAdvance = 4;
   }
+  
+  /* Return from Telos Graph to Character Select */
+  if(key == ' ' && menuAdvance == 4 && telosAdv == 1)
+  {
+    menuAdvance = 2;
+    telosAdv = 0;
+  }
+  
+  /* Return from Araxxor Graph to Character Select */
+  if(key == ' ' && menuAdvance == 4 && raxAdv == 1)
+  {
+    menuAdvance = 2;
+    raxAdv = 0;
+  }
 }
 
 /* Method to display the text nicely */
@@ -708,7 +722,7 @@ void raxGraphDraw()
   line(Border, Border, Border, height - Border + 25);
   
   
-  for (int i = 1 ; i < raxArray.size() ; i ++)
+  for(int i = 1 ; i < raxArray.size() ; i ++)
   {
     stroke(255,0,0);
     float xPos1 = map(i - 1, 0, telosArray.size() - 1, Border, width - Border);
