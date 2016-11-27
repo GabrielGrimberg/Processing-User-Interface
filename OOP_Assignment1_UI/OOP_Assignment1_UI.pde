@@ -287,6 +287,9 @@ void draw()
         textDisplay("Press Space to Return to Menu", TextForm.Big, 290, 700);
       }
       
+      stroke(255);
+      textDisplay("Per Hour", TextForm.Normal, 580, 650);
+      
       stroke(0,255,0);
       textDisplay("Kills", TextForm.Normal, 1200, 50);
       
@@ -316,6 +319,9 @@ void draw()
       {
         textDisplay("Press Space to Return to Menu", TextForm.Big, 290, 700);
       }
+      
+      stroke(255);
+      textDisplay("Per Hour", TextForm.Normal, 580, 650);
       
       stroke(0,255,0);
       textDisplay("Kills", TextForm.Normal, 1200, 50);
@@ -930,11 +936,6 @@ void graphRenderLive()
   }
   
   //The update method to set the random values.
-  graphUpdateLive();
-}
-
-void graphUpdateLive() 
-{
   TableRow Row = LiveGraph.addRow();
   
   //Random Values for Height
@@ -942,7 +943,6 @@ void graphUpdateLive()
   
   //Random Values for Width.
   Row.setFloat("Width", (LiveGraph.getRowCount()-1));
-  
 }
 
 /* Plotting the numbers on the live graph. */
