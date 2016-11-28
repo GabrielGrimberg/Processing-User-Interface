@@ -12,10 +12,8 @@ class PartSelecting
   {
     if(circleGlow == true)
     {
-      //How fast and how much the circles expands.
+      //How fast and how much the circles expands. TWO_PI added to increase speed.
       float glowRadius = 100.0 + 10 * sin(frameCount / (2 * frameRate) * TWO_PI);
-      
-      //Stroke weight for the circle.
       
       //Colour for the circle.
       strokeWeight(1.2);

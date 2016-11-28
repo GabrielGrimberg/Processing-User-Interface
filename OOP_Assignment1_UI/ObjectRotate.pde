@@ -21,6 +21,8 @@ class ObjectRotate
     {
       float xPos = width / xPOS + sin(radians(i) ) * 40; //Size of X
       float yPos = height / yPOS + cos(radians(i) ) * 40; //Size of Y
+      
+      //Circles expanding while the mouse is moving.
       float Movement = map(dist(mouseX, mouseY, xPos, yPos), -100, 100, -bendAmount / 20, bendAmount /20);
       
       pushMatrix();

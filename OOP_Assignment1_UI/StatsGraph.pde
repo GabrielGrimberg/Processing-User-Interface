@@ -26,14 +26,17 @@ class StatsGraph
     line(Border, Border, Border, height - Border);
     
     
-    for (int i = 1 ; i < telosArray.size() ; i ++)
+    for(int i = 1 ; i < telosArray.size() ; i ++)
     {
-      stroke(0,255,0);
-      float xPos1 = map(i - 1, 0, telosArray.size() - 1, Border, width - Border);
+      stroke(0,255,0); //Colour of graph.
+      
+      //Graph position locations.
+      float xPos1 = map(i - 1, 0, telosArray.size() - 1, Border, width - Border); 
       float yPos1 = map(telosArray.get(i - 1).HighestEnrage, StartingPoint, EndingPoint, height - Border, Border);
       float xPos2 = map(i, 0, telosArray.size() - 1, Border, width - Border);
       float yPos2 = map(telosArray.get(i).HighestEnrage, StartingPoint, EndingPoint, height - Border, Border);
-      line(xPos1, yPos1, xPos2, yPos2);
+      
+      line(xPos1, yPos1, xPos2, yPos2); //Drawing the line from the coordinates found.
       
       //Display results while moving the mouse.
       if (mouseX >= xPos1 && mouseX <= xPos2)
@@ -77,12 +80,15 @@ class StatsGraph
     
     for(int i = 1 ; i < raxArray.size() ; i ++)
     {
-      stroke(255,0,0);
+      stroke(255,0,0); //Graph colour.
+      
+      //Graph position locations.
       float xPos1 = map(i - 1, 0, telosArray.size() - 1, Border, width - Border);
       float yPos1 = map(telosArray.get(i - 1).HighestEnrage, StartingPoint, EndingPoint, height - Border, Border);
       float xPos2 = map(i, 0, telosArray.size() - 1, Border, width - Border);
       float yPos2 = map(telosArray.get(i).HighestEnrage, StartingPoint, EndingPoint, height - Border, Border);
-      line(xPos1, yPos1, xPos2, yPos2);
+      
+      line(xPos1, yPos1, xPos2, yPos2); //Drawing the line from the coordinates found.
       
       //Display results while moving the mouse.
       if (mouseX >= xPos1 && mouseX <= xPos2)
