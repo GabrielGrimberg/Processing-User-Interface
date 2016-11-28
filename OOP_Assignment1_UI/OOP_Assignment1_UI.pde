@@ -204,11 +204,13 @@ void draw()
       noRepeatBG = 3;
       BM();
     }
+    
     if(rollingTheTime > 25 && noRepeatBG == 3 || noRepeatBG == 4) //20 seconds
     {
       noRepeatBG = 4;
       Vind();
     }
+    
     if(rollingTheTime > 30 && noRepeatBG == 4 || noRepeatBG == 5) //25 seconds
     {
       noRepeatBG = 5;

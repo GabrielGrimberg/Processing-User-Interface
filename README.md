@@ -1,7 +1,7 @@
 # User Interface Assignment
 A repository for my first OOP assignment in second year.
 
-#### Breif
+#### Brief
  - "Use Processing to create a UI for a sci-fi movie device like a warp drive, engines, weapons system. You can base it on any movie you like or come up with your own. It should be kinda usable. It should have lots of animation & interactivity and look amazing. It can be as far out as you like. In other words it can be for an alien."
 
 #### My Idea
