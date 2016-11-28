@@ -27,6 +27,8 @@ A repository for my first OOP assignment in second year.
 #### Evaluation
 - Overall I am happy with my project, the loading screen aspect was the one that I liked the most, the images zoom in slowly while they dim up their brightness while playing the suitable music intro track for it.
 
+- Final releases have been added, three vidoes have also been added, one without sound, one with sound and one where I explain while running the program.
+
 #### Video(s)
 
 #### Normal Video
