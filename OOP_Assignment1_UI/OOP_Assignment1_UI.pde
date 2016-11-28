@@ -30,6 +30,18 @@ PartSelecting selectOnTelos2;
 PartSelecting selectOnAraxxor1;
 PartSelecting selectOnAraxxor2;
 
+/* Live Graph */
+LiveGraph TelosLiveGraph;
+LiveGraph AraxxorLiveGraph;
+
+/* Number for the live graph */
+LiveGraphNumPlot TelosNumPlot;
+LiveGraphNumPlot AraxxorNumPlot;
+
+/* Stats Graph */
+StatsGraph TelosStatsGraph;
+StatsGraph AraxxorStatsGraph;
+
 /* Sound Files */
 SoundFile clickSound; //Clicking Sound.
 SoundFile backgroundMusic; //Intro Music.
@@ -67,7 +79,6 @@ boolean mousePressedOnbox2 = false; //Variable to highlight if box is pressed.
 boolean mouseOnboxSkip = false; //Variable to check if the mouse is on the box.
 boolean mousePressedOnSkip = false; //Variable to highlight if box is pressed.
 
-
 /* Time Movement Variables */
 float timeDelta = 0;
 float rollingTheTime = 0;
@@ -104,7 +115,6 @@ float raxEndingPoint;
 
 void setup()
 {
-  //size(displayWidth, displayHeight); //Edit out for now..
   fullScreen(); //Goes fullscreen.
   smooth();
   frameRate(60);
@@ -113,9 +123,14 @@ void setup()
   telosLoadData();
   raxLoadData();
   
+  /*** Graph 1 ***/
+  TelosStatsGraph = new StatsGraph();
+  AraxxorStatsGraph = new StatsGraph();
+  
   /* Creating the graph */
-  telosGraphPlot();
-  raxGraphPlot();
+  TelosStatsGraph.telosGraphPlot();
+  AraxxorStatsGraph.raxGraphPlot();
+  
   Border = width * 0.1f;
   
   /* Printing the Results */
@@ -143,15 +158,22 @@ void setup()
   selectOnAraxxor2 = new PartSelecting(1085, 500, true);
   
   /*** Graph 2 ***/
+  //Live Graphs
+  TelosLiveGraph = new LiveGraph();
+  AraxxorLiveGraph = new LiveGraph();
+  
+  TelosNumPlot = new LiveGraphNumPlot();
+  AraxxorNumPlot = new LiveGraphNumPlot();
   
   //Live Graph 
   LiveGraph = new Table();
   LiveGraph.addColumn("Height");
   LiveGraph.addColumn("Width");
+  
 }
 
 void draw()
-{
+{  
   int programTimeRun = millis();
   timeDelta = (programTimeRun - resetTime) / 1000.0f;  
   resetTime = programTimeRun;
@@ -249,7 +271,7 @@ void draw()
     if(telosAdv == 1)
     {
       clear();
-      telosGraphDraw();
+      TelosStatsGraph.telosGraphDraw();
       if(frameCount / 30 % 2 == 0)
       {
         textDisplay("Press Space to Return to Menu", TextForm.Big, 290, 700);
@@ -262,7 +284,7 @@ void draw()
     if(raxAdv == 1)
     {
       clear();
-      raxGraphDraw();
+      TelosStatsGraph.raxGraphDraw();
       if(frameCount / 30 % 2 == 0)
       {
         textDisplay("Press Space to Return to Menu", TextForm.Big, 290, 700);
@@ -282,7 +304,7 @@ void draw()
       clear();
       frameRate(10);
       stroke(0,255,0);
-      graphRenderLive();
+      TelosLiveGraph.graphRenderLive();
       
       if(frameCount / 30 % 2 == 0)
       {
@@ -305,7 +327,7 @@ void draw()
       line(0, displayHeight / 2, displayWidth , displayHeight / 2);
       line(20, 0, 0 , displayWidth);
       
-      graphPlot();
+      TelosNumPlot.graphPlot();
       
     }
     
@@ -315,7 +337,7 @@ void draw()
       frameRate(20);
       stroke(255,0,0);
       
-      graphRenderLive();
+      AraxxorLiveGraph.graphRenderLive();
       
       if(frameCount / 30 % 2 == 0)
       {
@@ -338,7 +360,7 @@ void draw()
       line(0, displayHeight / 2, displayWidth , displayHeight / 2);
       line(20, 0, 0 , displayWidth);
       
-      graphPlot();
+      AraxxorNumPlot.graphPlot();
       
     }
     
@@ -807,162 +829,4 @@ void mouseClickSkipping()
       mousePressedOnSkip = false; //If not, set to false.
     }
   }
-}
-
-/***Character Features Below ***/
-
-/* Telos */
-/* Making the graph */
-void telosGraphPlot()
-{
-  StartingPoint = EndingPoint = telosArray.get(0).HighestEnrage; 
-  for (Telos Enrage: telosArray)
-  {
-    if(Enrage.HighestEnrage < StartingPoint)
-    {
-      StartingPoint = Enrage.HighestEnrage;
-    }
-    if (Enrage.HighestEnrage > EndingPoint)
-    {
-      EndingPoint = Enrage.HighestEnrage;
-    }    
-  }
-}
-
-/* Drawing the graph */
-void telosGraphDraw()
-{
-  stroke(0,255,0);
-  line(Border, height - Border, width - Border, height - Border);
-  line(Border, Border, Border, height - Border);
-  
-  
-  for (int i = 1 ; i < telosArray.size() ; i ++)
-  {
-    stroke(0,255,0);
-    float xPos1 = map(i - 1, 0, telosArray.size() - 1, Border, width - Border);
-    float yPos1 = map(telosArray.get(i - 1).HighestEnrage, StartingPoint, EndingPoint, height - Border, Border);
-    float xPos2 = map(i, 0, telosArray.size() - 1, Border, width - Border);
-    float yPos2 = map(telosArray.get(i).HighestEnrage, StartingPoint, EndingPoint, height - Border, Border);
-    line(xPos1, yPos1, xPos2, yPos2);
-    
-    //Display results while moving the mouse.
-    if (mouseX >= xPos1 && mouseX <= xPos2)
-    {      
-      fill(0);
-      rect(xPos1, yPos1, 5, 5);
-      fill(255);
-      text("Enrage: " + telosArray.get(i - 1).HighestEnrage, xPos1 + 10, yPos1);
-      text("Maximum Hit: " + telosArray.get(i - 1).MaxHit, xPos1 + 10, yPos1 + 10);
-      text("Minimum Hit: " + telosArray.get(i - 1).MinHit, xPos1 + 10, yPos1 + 20);
-      text("Loot Table: " + telosArray.get(i - 1).Package, xPos1 + 10, yPos1 + 30);
-    } 
-  }  
-}
-
-/* Araxxor */
-/* Making the graph */
-void raxGraphPlot()
-{
-  raxStartingPoint = raxEndingPoint = telosArray.get(0).HighestEnrage; 
-  for (Rax Enrage: raxArray)
-  {
-    if(Enrage.HighestEnrage < raxStartingPoint)
-    {
-      raxStartingPoint = Enrage.HighestEnrage;
-    }
-    if (Enrage.HighestEnrage > raxEndingPoint)
-    {
-      raxEndingPoint = Enrage.HighestEnrage;
-    }    
-  }
-}
-
-/* Drawing the graph */
-void raxGraphDraw()
-{
-  stroke(255,0,0);
-  line(Border, height - Border, width - Border, height - Border);
-  line(Border, Border, Border, height - Border);
-  
-  
-  for(int i = 1 ; i < raxArray.size() ; i ++)
-  {
-    stroke(255,0,0);
-    float xPos1 = map(i - 1, 0, telosArray.size() - 1, Border, width - Border);
-    float yPos1 = map(telosArray.get(i - 1).HighestEnrage, StartingPoint, EndingPoint, height - Border, Border);
-    float xPos2 = map(i, 0, telosArray.size() - 1, Border, width - Border);
-    float yPos2 = map(telosArray.get(i).HighestEnrage, StartingPoint, EndingPoint, height - Border, Border);
-    line(xPos1, yPos1, xPos2, yPos2);
-    
-    //Display results while moving the mouse.
-    if (mouseX >= xPos1 && mouseX <= xPos2)
-    {      
-      fill(0);
-      rect(xPos1, yPos1, 5, 5);
-      fill(255);
-      text("Enrage: " + raxArray.get(i - 1).HighestEnrage, xPos1 + 10, yPos1);
-      text("Maximum Hit: " + raxArray.get(i - 1).MaxHit, xPos1 + 10, yPos1 + 10);
-      text("Minimum Hit: " + raxArray.get(i - 1).MinHit, xPos1 + 10, yPos1 + 20);
-      text("Loot Table: " + raxArray.get(i - 1).Package, xPos1 + 10, yPos1 + 30);
-    } 
-  }  
-}
-
-/*** Telos Live Graph ***/
-
-void graphRenderLive()
-{
-  background(0);
-  
-  clear();
-  //Going over and over through the tables.
-  for(int i = 20; i < LiveGraph.getRowCount(); i++) 
-  { 
-    TableRow Row = LiveGraph.getRow(i);
-    
-    //Drawing the lines
-    float FirstxPos = Row.getFloat("Width") * 5; 
-    float FirstyPos = Row.getFloat("Height") * 5; 
- 
-    //Connecting the lines of the graph.
-    if(i > 0) 
-    {
-      TableRow lastRow = LiveGraph.getRow(i-1);
-      float lastXPos = lastRow.getFloat("Width") * 5; 
-      float lastYPos = lastRow.getFloat("Height") * 5; 
-      
-      //Drawing the lines for the graph.
-      line(lastXPos, lastYPos, FirstxPos, FirstyPos);
-    }
-  }
-  
-  //The update method to set the random values.
-  TableRow Row = LiveGraph.addRow();
-  
-  //Random Values for Height
-  Row.setFloat("Height", height / 5 * noise(LiveGraph.getRowCount() / 1.0));
-  
-  //Random Values for Width.
-  Row.setFloat("Width", (LiveGraph.getRowCount()-1));
-}
-
-/* Plotting the numbers on the live graph. */
-void graphPlot()
-{
-      textDisplay("-1000", TextForm.Normal, 15, 350);
-      textDisplay("-2000", TextForm.Normal, 15, 300);
-      textDisplay("-3000", TextForm.Normal, 15, 250);
-      textDisplay("-4000", TextForm.Normal, 16, 200);
-      textDisplay("-5000", TextForm.Normal, 18, 150);
-      textDisplay("-6000", TextForm.Normal, 18, 100);
-      textDisplay("-7000", TextForm.Normal, 18, 50);
-      
-      textDisplay("-1000", TextForm.Normal, 13, 450);
-      textDisplay("-2000", TextForm.Normal, 12, 500);
-      textDisplay("-3000", TextForm.Normal, 10, 550);
-      textDisplay("-4000", TextForm.Normal, 10, 600);
-      textDisplay("-5000", TextForm.Normal, 10, 650);
-      textDisplay("-6000", TextForm.Normal, 10, 700);
-      textDisplay("-7000", TextForm.Normal, 10, 750);
 }
