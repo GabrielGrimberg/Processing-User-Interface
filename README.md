@@ -27,6 +27,17 @@ A repository for my first OOP assignment in second year.
 #### Evaluation
 - Overall I am happy with my project, the loading screen aspect was the one that I liked the most, the images zoom in slowly while they dim up their brightness while playing the suitable music intro track for it.
 
+#### Video(s)
+
+#### Normal Video
+[![Video](http://img.youtube.com/vi/1OAnI_wkVhs/0.jpg)](https://www.youtube.com/watch?v=1OAnI_wkVhs)
+
+#### Explination Video
+[![Video](http://img.youtube.com/vi/xjKo6C-KYHg/0.jpg)](https://www.youtube.com/watch?v=xjKo6C-KYHg)
+
+#### No Sound Video
+[![Video](http://img.youtube.com/vi/H8XH0KjwBXk/0.jpg)](https://www.youtube.com/watch?v=H8XH0KjwBXk)
+
 #### Credits
 
 ##### Images
