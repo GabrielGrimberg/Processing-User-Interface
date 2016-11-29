@@ -29,6 +29,16 @@ A repository for my first OOP assignment in second year.
 
 - Final releases have been added, three vidoes have also been added, one without sound, one with sound and one where I explain while running the program.
 
+#### Key Features
+- Animation and interactivity included.
+- Plenty of classes made for buttons, loading screen etc..
+- Fancy text using enum. 
+- File I/O to display the stats graph for both characters.
+- A lot of advanced processing functions used. 
+- Functions used such as pushMatrix, popMatrix, translate, rotate, tint and more.
+- The unit circle and trigonometry that also uses a PVector.
+- Arrays & array lists included.
+
 #### Video(s)
 
 #### Normal Video
