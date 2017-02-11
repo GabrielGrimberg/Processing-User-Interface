@@ -41,14 +41,8 @@ A repository for my first OOP assignment in second year.
 
 #### Video(s)
 
-#### Normal Video
-[![Video](http://img.youtube.com/vi/1OAnI_wkVhs/0.jpg)](https://www.youtube.com/watch?v=1OAnI_wkVhs)
-
-#### Explination Video
-[![Video](http://img.youtube.com/vi/xjKo6C-KYHg/0.jpg)](https://www.youtube.com/watch?v=xjKo6C-KYHg)
-
-#### No Sound Video
-[![Video](http://img.youtube.com/vi/H8XH0KjwBXk/0.jpg)](https://www.youtube.com/watch?v=H8XH0KjwBXk)
+#### Updated Video : 11th of February 2017
+[![Video](http://img.youtube.com/vi/1OAnI_wkVhs/0.jpg)](https://youtu.be/fCib5pW75uQ)
 
 #### Credits
 
