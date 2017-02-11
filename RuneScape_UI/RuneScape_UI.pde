@@ -115,7 +115,7 @@ float raxEndingPoint;
 
 void setup()
 {
-  fullScreen(); //Goes fullscreen.
+  fullScreen(P2D); //Goes fullscreen.
   smooth();
   frameRate(60);
   
